@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700&display=swap');
+
+/* Global */
+body, input, button{
+    font-family: 'Montserrat', sans-serif;
+}
+
+p {
+    line-height: 17px;
+}
+
+p, label, input, button, ::placeholder{
+    font-size: 14px;
+}
+
+::placeholder {
+    color: #B3B3B3;
+}
+
+.body-container{
+    display: flex;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Aside */
+aside {
+    height: 100vh;
+    background-color: #323CEA;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.25);
+    padding: 1rem 2rem 1.5rem 3rem;
+    width: 30%;
+}
+
+aside .container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+aside h1, aside p, aside h3{
+    color: #F3F3F3;
+}
+
+.brand-name {
+    font-size: 64px;
+}
+
+.brand-sub-name{
+    font-size: 16px;
+    margin-left: 2px;
+}
+
+.auth-desc {
+    font-size: 36px;
+    line-height: 44px;
+}
+
+.brand-name, .auth-desc {
+    font-weight: bold;
+}
+
+.auth{
+    margin-bottom: 3rem;
+}
+
+.auth-option{
+    margin-top: 20px;
+}
+
+a{
+    text-decoration: none;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
+a.login {
+    color: #F3F3F3;
+}
+
+a.sign-up{
+    color: rgba(243, 243, 243, 0.8);
+    margin-left: 20px;
+}
+
+.owner-desc{
+    font-size: 18px;
+}
+
+/* Main-Content */
+main{
+    align-self: center;
+    margin: 0 0 0 6rem;
+    animation: landing .5s ease-in;
+    width: 70%;
+}
+
+main h1, main p, main span, main label{
+    color: #444;
+}
+
+main h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.welcoming-desc{
+    margin-top: 10px;
+}
+
+.label-username, .label-password {
+    display: block;
+}
+
+#username, #password, button{
+    width: 37%;
+    margin-top: 8px;
+    border-radius: 5px;
+    border: 2px solid #B3B3B3;
+}
+
+#username, #password{
+    height: 45px;
+    outline: 0;
+    padding-left: 5px;
+}
+
+button{
+    height: 40px;
+    border: 0;
+    font-weight: bold;
+    color: #F3F3F3;
+    background-color: #323CEA;
+    cursor: pointer;
+}
+
+button:hover, #cookie:hover{
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+    transition: ease-in .25s; 
+}
+
+button:hover {
+    background-color: #1c24bb;
+}
+
+#username:focus, #password:focus{
+    border: 2px solid #323CEA;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+    transition: ease-in .25s; 
+    color: #323CEA;
+}
+
+.login-form{
+    margin-top: 20px;
+}
+
+.password-field, .cookie-field{
+    margin-top: 18px;
+}
+
+.button-field{
+    margin-top: 10px;
+}
+
+/* Animation */
+@keyframes landing{
+    0% {
+        transform:translateX(200px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Media Queries */
+@media screen and (max-width:1023px) {
+    .body-container{
+        flex-direction: column;
+    }
+
+    /* Aside */
+    aside {
+        height: 350px;
+        padding: 1rem 1.5rem;
+        width: 100%;
+    }
+    
+    aside .container{
+        flex-direction: row;
+    }
+
+    .owner, .auth-desc{
+        display: none;
+    }
+
+    a{
+        font-size: 16px;
+    }
+
+    a.sign-up{
+        margin-left: 10px;  
+    }
+
+    .brand {
+        order: 1;
+    }
+
+    .owner {
+        order: 2;
+    }
+
+    .auth{
+        order: 3;
+        margin: 0;
+    }
+
+    /* Main */
+    main{
+        width: 50%;
+        position: relative;
+        top: -12rem;
+        margin: 0;
+        background-color: #FFF;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        padding: 2rem 3rem;
+
+    }
+
+    main h1{
+        font-size: 28px;
+    }
+
+    #username, #password, button{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px){
+    /* Aside */
+    .brand-name {
+        font-size: 48px;
+    }
+
+    .brand-sub-name {
+        font-size: 12px;
+    }
+
+    /* Main */
+    main {
+        padding: 2rem 2rem;
+        width: 80%;
+    }
+}
+
+@media screen and (min-width:1921px){
+    .body-container{
+        width: 1890px;
+    }
+}
+
