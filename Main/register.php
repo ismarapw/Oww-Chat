@@ -20,7 +20,7 @@
                     <p class="brand-sub-name">Chat Application</p>
                 </div>
                 <div class="auth">
-                    <h1 class="auth-desc">Hey,<br>Login Now.</h1>
+                    <h1 class="auth-desc">New User,<br>Registration.</h1>
                     <div class="auth-option">
                         <a class="login" href="index.php">Login</a>
                         <a class="sign-up" href="register.php">Sign Up</a>

@@ -252,7 +252,6 @@ nav h1 {
 .upload-image{
     margin-left: 1.5rem;
     align-self: center;
-    min-height: 30px;
     width: 35%;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
