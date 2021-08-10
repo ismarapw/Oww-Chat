@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700&display=swap');
 
 /* Global */
+html, body {
+    height: 100%;
+}
+
 body, input, button{
     font-family: 'Montserrat', sans-serif;
 }
@@ -59,6 +63,8 @@ aside.persons-chat {
     height: 100vh;
     width: 30%;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow-x: hidden;  
 }
 
 /* Aside - Profile */
@@ -184,34 +190,16 @@ section.friends{
     margin-top: 1rem;
 }
 
-/* main */
-main.conversation{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 70%;
-    text-align: center;
-}
-
-.inactive-chat i {
-    font-size: 100px;
-    color: #444;
-}
-
-.inactive-chat-desc {
-    margin-top: 10px;
-    font-size: 18px;
-    color: #444;
-}
-
-/* Navbar */
+/* Aside - Navbar */
 nav.edit-profile{
     position: absolute;
     background-color: #fff;
     height: 100vh;
-    width: 30%;
+    width: 100%;
+    top: 0;
+    left: 0;
     padding: 2.5rem 2rem 2rem 3.2rem;
-    transform: translateX(-800px);
+    transform: translateX(-100%); 
     transition: .4s ease-in-out;
 }
 
@@ -343,19 +331,39 @@ nav .profile-edit{
     cursor: pointer;
 }
 
+/* main */
+main.conversation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    text-align: center;
+}
+
+.inactive-chat i {
+    font-size: 100px;
+    color: #444;
+}
+
+.inactive-chat-desc {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #444;
+}
+
 
 
 /* Media Queries */
 @media screen and (max-width:1023px) {
     /* Aside, main, Navbar */
-    aside.persons-chat, main.conversation, nav.edit-profile{
+    aside.persons-chat, main.conversation{
         width: 50%;
     }
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 768px){
     /* Aside, Navbar */
-    aside.persons-chat, nav.edit-profile {
+    aside.persons-chat{
         width: 100%;
     }
 
@@ -364,4 +372,12 @@ nav .profile-edit{
         display: none;
     }
 }
+
+@media screen and (min-width:1921px){
+    .body-container{
+        width: 1890px;
+        margin: auto;
+    }
+}
+
 

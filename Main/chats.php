@@ -127,6 +127,48 @@
                     </div>
                 </div>
             </section>
+            <nav class="edit-profile">
+                <div class="container">
+                    <header>
+                        <div class="title">
+                            <h1 class="main-title">Edit Profile</h1>
+                            <p class="desc-title">Change your profile details</p>
+                        </div>
+                        <div class="close-btn">
+                            <i class="ri-close-line"></i>
+                        </div>
+                    </header>
+                    <section class="profile-edit">
+                        <div class="edit-form">
+                            <form action="" method="POST">
+                                <div class="image-field">
+                                    <div class="user-image">
+                                        <img src="img/user-edit.png" alt="user-profile">
+                                        <label for="image-input" class="upload-image">Choose a file</label>
+                                    </div>
+                                    <input type="file" name="image-input" id="image-input" style="display: none;">
+                                </div>
+                                <div class="fullname-field">
+                                    <label for="fullname" class="label-fullname">Fullname</label>
+                                    <input type="text" name="fullname" id="fullname" placeholder="Fullname" required value="John Brian">
+                                </div>
+                                <div class="email-field">
+                                    <label for="email" class="label-email">Email</label>
+                                    <input type="email" name="email" id="email" placeholder="Email" required value="john123@gmail.com">
+                                </div>
+                                <div class="username-field">
+                                    <label for="username" class="label-username">Username</label>
+                                    <input type="username" name="username" id="username" placeholder="username" required value="john123">
+                                </div>
+                                <div class="submit-btn">
+                                    <button type="button" class="submit">Edit</button>
+                                    <button type="button" class="discard">Discard</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </nav>
         </aside>
         <main class="conversation">
             <div class="container">
@@ -136,48 +178,6 @@
                 </div>
             </div>
         </main>
-        <nav class="edit-profile">
-            <div class="container">
-                <header>
-                    <div class="title">
-                        <h1 class="main-title">Edit Profile</h1>
-                        <p class="desc-title">Change your profile details</p>
-                    </div>
-                    <div class="close-btn">
-                        <i class="ri-close-line"></i>
-                    </div>
-                </header>
-                <section class="profile-edit">
-                    <div class="edit-form">
-                        <form action="" method="POST">
-                            <div class="image-field">
-                                <div class="user-image">
-                                    <img src="img/user-edit.png" alt="user-profile">
-                                    <label for="image-input" class="upload-image">Choose a file</label>
-                                </div>
-                                <input type="file" name="image-input" id="image-input" style="display: none;">
-                            </div>
-                            <div class="fullname-field">
-                                <label for="fullname" class="label-fullname">Fullname</label>
-                                <input type="text" name="fullname" id="fullname" placeholder="Fullname" required value="John Brian">
-                            </div>
-                            <div class="email-field">
-                                <label for="email" class="label-email">Email</label>
-                                <input type="email" name="email" id="email" placeholder="Email" required value="john123@gmail.com">
-                            </div>
-                            <div class="username-field">
-                                <label for="username" class="label-username">Username</label>
-                                <input type="username" name="username" id="username" placeholder="username" required value="john123">
-                            </div>
-                            <div class="submit-btn">
-                                <button type="button" class="submit">Edit</button>
-                                <button type="button" class="discard">Discard</button>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-            </div>
-        </nav>
     </div>
     <script src="script/chats.js"></script>
 </body>
