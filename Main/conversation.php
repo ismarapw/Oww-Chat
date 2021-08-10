@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oww Chat</title>
     <link rel="stylesheet" href="Style/reset.css">
-    <link rel="stylesheet" href="Style/chat.css">
+    <link rel="stylesheet" href="Style/conversation.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
@@ -37,8 +37,10 @@
             <section class="search">
                 <div class="container">
                     <div class="search-box">
-                        <i class="ri-search-line"></i>
-                        <input type="text" name="search-input" id="search-input" placeholder="Find Someone">
+                        <form method="GET" class="search-form">
+                            <i class="ri-search-line"></i>
+                            <input type="text" name="search-input" id="search-input" placeholder="Find Someone">
+                        </form>
                     </div>
                 </div>
             </section>
@@ -48,7 +50,7 @@
                         <div class="friend-image">
                             <img src="img/user-friend.png" alt="friend-image">
                         </div>
-                        <div class="friend-info">
+                        <div class="friend-last-chat">
                             <h3 class="name">Missxiu</h3>
                             <p class="last-message">Okey, i’ll call you back later</p>
                         </div>
@@ -99,12 +101,89 @@
             </nav>
         </aside>
         <main class="conversation">
-            <div class="container">
-                <div class="inactive-chat">
-                    <i class="ri-message-2-line"></i>
-                    <p class="inactive-chat-desc">Start a Conversation</p>
+            <header class="friend-profile">
+                <div class="container">
+                    <div class="friend-content">
+                        <div class="friend-image">
+                            <img src="img/user-friend.png" alt="profile-image">
+                        </div>
+                        <div class="friend-info">
+                            <h3 class="name">Missxiu</h3>
+                            <div class="status">
+                                <span class="indicator"></span>
+                                <span class="indicator-desc">Online</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-toggle">
+                        <div class="three-dots"></div>
+                        <div class="three-dots"></div>
+                        <div class="three-dots"></div>
+                    </div>
                 </div>
-            </div>
+            </header>
+            <section class="conversation-area">
+                <div class="container">
+                    <div class="sent">
+                        <p class="message">Xiu, Can we meet up on sunday?</p>
+                    </div>
+                    <div class="reply">
+                        <p class="message">Sure, but for what ?</p>
+                    </div>
+                    <div class="reply">
+                        <p class="message">Btw, do you make money through photography?</p>
+                    </div>
+                    <div class="sent">
+                        <p class="message">To discuss the business that we will build</p>
+                    </div>
+                    <div class="sent">
+                        <p class="message">Yes, exactly i make money through photograpy every week.</p>
+                    </div>
+                    <div class="reply">
+                        <p class="message">Ohh, oke i see you later, give me further information for the location</p>
+                    </div>
+                    <div class="reply">
+                        <p class="message">Wow that’s amazing</p>
+                    </div>
+                    <div class="sent">
+                        <p class="message">Okey, i’ll call you back later</p>
+                    </div>
+                    <div class="sent">
+                        <p class="message">Xiu, Can we meet up on sunday?</p>
+                    </div>
+                    <div class="reply">
+                        <p class="message">Sure, but for what ?</p>
+                    </div>
+                    <div class="reply">
+                        <p class="message">Btw, do you make money through photography?</p>
+                    </div>
+                    <div class="sent">
+                        <p class="message">To discuss the business that we will build</p>
+                    </div>
+                    <div class="sent">
+                        <p class="message">Yes, exactly i make money through photograpy every week.</p>
+                    </div>
+                    <div class="reply">
+                        <p class="message">Ohh, oke i see you later, give me further information for the location</p>
+                    </div>
+                    <div class="reply">
+                        <p class="message">Wow that’s amazing</p>
+                    </div>
+                    <div class="sent">
+                        <p class="message">Okey, i’ll call you back later</p>
+                    </div>
+                </div>
+            </section>
+            <section class="send-area">
+                <div class="container">
+                    <form method="GET" class="message-form">
+                        <input type="text" name="" id="input-message" placeholder="Start typing your message">
+                        <button type="button" id="submit-message">                           
+                            <i class="ri-send-plane-fill"></i>
+                        </button>
+                    </form>
+                </div>
+            </section>
         </main>
     </div>
     <script src="script/chats.js"></script>
