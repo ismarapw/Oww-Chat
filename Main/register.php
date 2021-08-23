@@ -1,4 +1,5 @@
 <?php
+        
 ?>
 
 <!DOCTYPE html>
@@ -8,8 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="Style/reset.css">
-    <link rel="stylesheet" href="Style/register.css">
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/register.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
     <div class="body-container">
@@ -38,7 +40,7 @@
                     <p class="welcoming-desc">Enter your credentials to register your account</p>
                 </div>
                 <div class="register-form">
-                    <form action="" method="POST">
+                    <form action="" method="POST" id="form-inputs">
                         <div class="image-field">
                             <div class="image-upload">
                                 <img src="img/user-default.svg" alt="user-default">
@@ -63,13 +65,14 @@
                             <input type="password" name="password" id="password" placeholder="Password" required>
                         </div>
                         <div class="button-field">
-                            <button type="button" name="button" class="sign-up">Sign Up</button>
+                            <button type="button" name="button" class="sign-up" id="submit-button">Sign Up</button>
                         </div>
                     </form>
                 </div>
             </div>
         </main>
+        <div class="status"></div>
     </div> 
-    <script src="Script/index.js"></script>    
+    <script src="script/register.js"></script>    
 </body>
 </html>

@@ -333,10 +333,10 @@ main.conversation{
 
 /* Main - header */
 main .friend-profile{
-    background: #fff;
+    background-color: #fafafa;
     padding: 1rem 2rem 0 1.25rem;
     height: 90px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
 }
 
 .friend-profile .container, .friend-profile .friend-content{
@@ -414,17 +414,17 @@ section.conversation-area .container {
 
 /* Main - Send Box Area */
 section.send-area {
-    background-color: #fff;
+    background-color: #fafafa;
     position: absolute;
     bottom: 0;
     width: 100%;
-    padding: 1.5rem 1rem 1rem 1rem;
-    box-shadow: 2px -4px 5px rgba(0, 0, 0, 0.25);
+    padding: 1rem;
+    box-shadow: 2px -3px 5px rgba(0, 0, 0, 0.25);
 }
 
 .send-area input{
     width: 90%;
-    height: 35px;
+    height: 40px;
     border: 2px solid #B3B3B3;
     border-radius: 5px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
@@ -437,9 +437,10 @@ section.send-area {
     background-color: #323CEA;
     border: none;
     border-radius: 5px;
-    height: 35px;
+    height: 40px;
     width: 50px;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 #submit-message i {

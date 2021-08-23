@@ -1,4 +1,12 @@
 <?php
+session_start();
+if(!isset($_SESSION["currentId"])){
+    header("Location:index.php");
+    exit;
+}
+
+echo $_SESSION["currentId"];
+
 ?>
 
 <!DOCTYPE html>
@@ -8,8 +16,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oww Chat</title>
-    <link rel="stylesheet" href="Style/reset.css">
-    <link rel="stylesheet" href="Style/chat.css">
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/chat.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>

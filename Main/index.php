@@ -8,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="Style/reset.css">
-    <link rel="stylesheet" href="Style/index.css">
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/index.css">
 </head>
 <body>
     <div class="body-container">
@@ -38,7 +38,7 @@
                     <p class="welcoming-desc">Enter your credentials to access your account</p>
                 </div>
                 <div class="login-form">
-                    <form action="" method="POST" class="login-form">
+                    <form action="" method="POST" class="login-form" id="form-inputs">
                         <div class="username-field">
                             <label for="username" class="label-username">Username</label>
                             <input type="text" name="username" id="username" placeholder="Username" required>
@@ -52,13 +52,14 @@
                             <label for="cookie" class="label-cookie">Remember me?</label>
                         </div>
                         <div class="button-field">
-                            <button type="button" name="button">Sign In</button>
+                            <button type="button" name="button" id="submit-button">Sign In</button>
                         </div>
                     </form>
                 </div>
             </div>
         </main>
+        <div class="status"></div>
     </div> 
-    <script src="Script/index.js"></script>    
+    <script src="script/index.js"></script>    
 </body>
 </html>

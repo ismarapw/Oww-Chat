@@ -165,6 +165,18 @@ button:hover {
     margin-top: 10px;
 }
 
+/* Status validation */
+.status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #F3F3F3;
+}
+
 /* Animation */
 @keyframes landing{
     0% {

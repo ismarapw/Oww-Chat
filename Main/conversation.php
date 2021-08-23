@@ -1,4 +1,6 @@
 <?php
+
+
 ?>
 
 <!DOCTYPE html>
@@ -8,8 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oww Chat</title>
-    <link rel="stylesheet" href="Style/reset.css">
-    <link rel="stylesheet" href="Style/conversation.css">
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/conversation.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
@@ -177,7 +179,7 @@
             <section class="send-area">
                 <div class="container">
                     <form method="GET" class="message-form">
-                        <input type="text" name="" id="input-message" placeholder="Start typing your message">
+                        <input type="text" name="" id="input-message" placeholder="Start typing your message" autocomplete="off" required>
                         <button type="button" id="submit-message">                           
                             <i class="ri-send-plane-fill"></i>
                         </button>
@@ -187,5 +189,6 @@
         </main>
     </div>
     <script src="script/chats.js"></script>
+    <script src="script/conversation.js"></script>
 </body>
 </html>
