@@ -43,63 +43,60 @@ function register($fullname,$email, $username, $password, $image){
     // get global scope of database
     global $conn;
 
-    // Add style for status validation
-    $style = 'padding:5px 0;';
 
     // check full name
     if(strlen($fullname) === 0){
-        return "<p style=$style>Please insert full name</p>";
+        return "<p>Please insert full name</p>";
     }
 
     // check email
     if(!(filter_var($email, FILTER_VALIDATE_EMAIL))){
-        return "<p style=$style>Please insert valid email</p>";
+        return "<p>Please insert valid email</p>";
     }else{
         $query = "SELECT email FROM users where email = '$email'";
         mysqli_query($conn, $query);
         if(mysqli_affected_rows($conn) > 0){
-            return "<p style=$style>Email is already taken</p>";
+            return "<p>Email is already taken</p>";
         }
     }
 
     // check username
     if(strlen($username) === 0){
-        return "<p style=$style>Please insert username</p>";
+        return "<p>Please insert username</p>";
     }else {
         $query = "SELECT username FROM users where username = '$username'";
         mysqli_query($conn, $query);
         if(mysqli_affected_rows($conn) > 0){
-            return "<p style=$style>Username is already taken</p>";
+            return "<p>Username is already taken</p>";
         }
     }
 
     // check password
     if(strlen($password) < 6){
-        return "<p style=$style>Password must be at least 6 characters</p>";
+        return "<p>Password must be at least 6 characters</p>";
     }
 
     // check image
-    if(upload($image) === "upload an image"){
-        return "<p style=$style>Please upload a profile image</p>";
-    }else if(upload($image) === "not valid extension"){
-        return "<p style=$style>Image extension must be jpg/jpeg/png</p>";
-    }else if(upload($image) === "file's to big"){
-        return "<p style=$style>Image size must be under 1 MB</p>";
-    }else {
-        $imageName = upload($image);
+    $imageUpload = upload($image);
+    if($imageUpload === "upload an image"){
+        return "<p>Please upload a profile image</p>";
+    }else if($imageUpload === "not valid extension"){
+        return "<p>Image extension must be jpg/jpeg/png</p>";
+    }else if($imageUpload === "file's to big"){
+        return "<p>Image size must be under 1 MB</p>";
     }
-
+    
     
     /* --------- Insert User Form to Database----------- */
-
+    
     // hash password
     $password = password_hash($password, PASSWORD_DEFAULT);
-
+    
     // insert data
     $query = "INSERT INTO users(fullname, email, username, password, profile_image) VALUES
-                ('$fullname', '$email', '$username', '$password', '$imageName')";
+                ('$fullname', '$email', '$username', '$password', '$imageUpload')";
     mysqli_query($conn, $query);
-
+    
     // check error sql
     if(mysqli_error($conn) > 0){
         return mysqli_error($conn);
@@ -114,14 +111,11 @@ function login($username, $password){
     // get global scope of database
     global $conn;
 
-    // Add style for status validation
-    $style = 'padding:5px 0;';
-
     // check username
     if(strlen($username) === 0){
-        return "<p style=$style>Please insert username</p>";
+        return "<p>Please insert username</p>";
     }else if(strlen($password) === 0){
-        return "<p style=$style>Please insert password</p>";
+        return "<p>Please insert password</p>";
     }else {
         $query = "SELECT username, password FROM users where username = '$username'";
         $result = mysqli_query($conn, $query);
@@ -132,10 +126,10 @@ function login($username, $password){
             if(password_verify($password, $passwordInDb)){
                 return "found";
             }else {
-                return "<p style=$style>Wrong username or password</p>";
+                return "<p>Wrong username or password</p>";
             }
         }else{
-            return "<p style=$style>Wrong username or password</p>";
+            return "<p>Wrong username or password</p>";
         }
     }
 }
