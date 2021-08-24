@@ -1,11 +1,19 @@
 <?php
 session_start();
+require "function.php";
+
 if(!isset($_SESSION["currentId"])){
     header("Location:index.php");
     exit;
 }
 
-echo $_SESSION["currentId"];
+// user id initialization
+$currentUserId = $_SESSION["currentId"];
+
+// get user info from function
+$getRow = getUserInfo($currentUserId);
+
+// get user friend list from function
 
 ?>
 
@@ -27,10 +35,10 @@ echo $_SESSION["currentId"];
                 <div class="container">
                     <div class="profile-content">
                         <div class="profile-image">
-                            <img src="img/user-profile.png" alt="profile-image">
+                            <img src="img/<?php echo $getRow["profile_image"]; ?>" alt="profile-image">
                         </div>
                         <div class="profile-info">
-                            <h3 class="name">John Brian</h3>
+                            <h3 class="name"><?php echo $getRow["fullname"]; ?></h3>
                             <div class="status">
                                 <span class="indicator"></span>
                                 <span class="indicator-desc">Online</span>
@@ -46,13 +54,14 @@ echo $_SESSION["currentId"];
                 <div class="container">
                     <div class="search-box">
                         <i class="ri-search-line"></i>
-                        <input type="text" name="search-input" id="search-input" placeholder="Find Someone">
+                        <input type="text" name="search-input" id="search-input" placeholder="Find Someone" autocomplete="off">
                     </div>
+                    <div class="search-result"></div>
                 </div>
             </section>
             <section class="friends">
                 <div class="container">
-                    <div class="friend-content">
+                     <div class="friend-content">
                         <div class="friend-image">
                             <img src="img/user-friend.png" alt="friend-image">
                         </div>
@@ -79,22 +88,22 @@ echo $_SESSION["currentId"];
                             <form action="" method="POST">
                                 <div class="image-field">
                                     <div class="user-image">
-                                        <img src="img/user-edit.png" alt="user-profile">
+                                        <img src="img/<?php echo $getRow["profile_image"]; ?>" alt="user-profile">
                                         <label for="image-input" class="upload-image">Choose a file</label>
                                     </div>
                                     <input type="file" name="image-input" id="image-input" style="display: none;">
                                 </div>
                                 <div class="fullname-field">
                                     <label for="fullname" class="label-fullname">Fullname</label>
-                                    <input type="text" name="fullname" id="fullname" placeholder="Fullname" required value="John Brian">
+                                    <input type="text" name="fullname" id="fullname" placeholder="Fullname" required value="<?php echo $getRow["fullname"]; ?>">
                                 </div>
                                 <div class="email-field">
                                     <label for="email" class="label-email">Email</label>
-                                    <input type="email" name="email" id="email" placeholder="Email" required value="john123@gmail.com">
+                                    <input type="email" name="email" id="email" placeholder="Email" required value="<?php echo $getRow["email"]; ?>">
                                 </div>
                                 <div class="username-field">
                                     <label for="username" class="label-username">Username</label>
-                                    <input type="username" name="username" id="username" placeholder="username" required value="john123">
+                                    <input type="username" name="username" id="username" placeholder="username" required value="<?php echo $getRow["username"]; ?>">
                                 </div>
                                 <div class="submit-btn">
                                     <button type="button" class="submit">Edit</button>
@@ -115,6 +124,6 @@ echo $_SESSION["currentId"];
             </div>
         </main>
     </div>
-    <script src="script/chats.js"></script>
+    <script src="script/chat.js"></script>
 </body>
 </html>

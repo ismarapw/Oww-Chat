@@ -12,7 +12,7 @@ function upload($file){
         return "upload an image";
     }
 
-    // initiate valid extension
+    //valid extension initialization
     $validFile = ["jpg","jpeg","png"];
     $explodeFile = explode(".", $fileName);
     $fileExt = strtolower(end($explodeFile));
@@ -43,17 +43,12 @@ function register($fullname,$email, $username, $password, $image){
     // get global scope of database
     global $conn;
 
-    // initiate input validation
-    $fullnameValid = $usernameValid = $emailValid = $passwordValid = $imageValid =  false;
-
     // Add style for status validation
     $style = 'padding:5px 0;';
 
     // check full name
     if(strlen($fullname) === 0){
         return "<p style=$style>Please insert full name</p>";
-    }else {
-        $fullnameValid = true;
     }
 
     // check email
@@ -64,8 +59,6 @@ function register($fullname,$email, $username, $password, $image){
         mysqli_query($conn, $query);
         if(mysqli_affected_rows($conn) > 0){
             return "<p style=$style>Email is already taken</p>";
-        }else {
-            $emailValid = true;
         }
     }
 
@@ -77,16 +70,12 @@ function register($fullname,$email, $username, $password, $image){
         mysqli_query($conn, $query);
         if(mysqli_affected_rows($conn) > 0){
             return "<p style=$style>Username is already taken</p>";
-        }else{
-            $usernameValid = true;
         }
     }
 
     // check password
     if(strlen($password) < 6){
         return "<p style=$style>Password must be at least 6 characters</p>";
-    }else {
-        $passwordValid = true;
     }
 
     // check image
@@ -98,28 +87,24 @@ function register($fullname,$email, $username, $password, $image){
         return "<p style=$style>Image size must be under 1 MB</p>";
     }else {
         $imageName = upload($image);
-        $imageValid = true;
     }
 
     
     /* --------- Insert User Form to Database----------- */
 
-    // confirm input is true
-    if($fullnameValid && $usernameValid && $emailValid && $passwordValid && $imageValid){
-        // hash password
-        $password = password_hash($password, PASSWORD_DEFAULT);
+    // hash password
+    $password = password_hash($password, PASSWORD_DEFAULT);
 
-        // insert data
-        $query = "INSERT INTO users(fullname, email, username, password, profile_image) VALUES
-                  ('$fullname', '$email', '$username', '$password', '$imageName')";
-        mysqli_query($conn, $query);
+    // insert data
+    $query = "INSERT INTO users(fullname, email, username, password, profile_image) VALUES
+                ('$fullname', '$email', '$username', '$password', '$imageName')";
+    mysqli_query($conn, $query);
 
-        // check error sql
-        if(mysqli_error($conn) > 0){
-            return mysqli_error($conn);
-        }else {
-            return "inserted";
-        }
+    // check error sql
+    if(mysqli_error($conn) > 0){
+        return mysqli_error($conn);
+    }else {
+        return "inserted";
     }
 }
 
@@ -140,9 +125,9 @@ function login($username, $password){
     }else {
         $query = "SELECT username, password FROM users where username = '$username'";
         $result = mysqli_query($conn, $query);
-        $row = mysqli_fetch_assoc($result);
         if(mysqli_affected_rows($conn) === 1){
             // check password
+            $row = mysqli_fetch_assoc($result);
             $passwordInDb = $row["password"];
             if(password_verify($password, $passwordInDb)){
                 return "found";
@@ -153,6 +138,41 @@ function login($username, $password){
             return "<p style=$style>Wrong username or password</p>";
         }
     }
+}
+
+function searchUser($inputValue){
+    // get global scope of database
+    global $conn;
+
+    if($inputValue === ""){
+        return "blank value";
+    }
+
+    // Search user in database
+    $query = "SELECT * from users where username like '%$inputValue%'";
+    $result = mysqli_query($conn, $query);
+    if(mysqli_affected_rows($conn) > 0){
+        $users = [];
+        while($row = mysqli_fetch_assoc($result)){
+            $users[] = $row;
+        }
+        return $users;
+    }else {
+        return "not found";
+    }
+    
+}
+
+function getUserInfo($userId){
+    // get global scope of database
+    global $conn;
+
+    // get user info
+    $query = "SELECT * from users where user_id = $userId";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    return $row;
 }
 
 ?>

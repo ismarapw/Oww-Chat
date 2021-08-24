@@ -19,7 +19,7 @@ function submitForm(form){
 
             // Redirect if succesfull
             if(status.innerHTML.length === 0){
-                document.location.href = 'chats.php';
+                document.location.href = 'chat.php';
             }
         }else{
             console.log("Error Server Not Found or Busy");
