@@ -1,0 +1,355 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700&display=swap');
+
+/* Global */
+body, input, button{
+    font-family: 'Montserrat', sans-serif;
+    text-overflow: ellipsis;
+}
+
+p {
+    line-height: 17px;
+}
+
+p, label, input, button, ::placeholder{
+    font-size: 14px;
+}
+
+::placeholder {
+    color: #B3B3B3;
+}
+
+.body-container{
+    display: flex;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Aside */
+aside {
+    height: 100vh;
+    background-color: #323CEA;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.25);
+    padding: 1rem 2rem 1.5rem 3rem;
+    width: 30%;
+}
+
+aside .container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+aside h1, aside p, aside h3{
+    color: #F3F3F3;
+}
+
+.brand-name {
+    font-size: 64px;
+}
+
+.brand-sub-name{
+    font-size: 16px;
+    margin-left: 2px;
+}
+
+.auth-desc {
+    font-size: 36px;
+    line-height: 44px;
+}
+
+.brand-name, .auth-desc {
+    font-weight: bold;
+}
+
+.auth{
+    margin-bottom: 3rem;
+}
+
+.auth-option{
+    margin-top: 20px;
+}
+
+a{
+    text-decoration: none;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
+a.login {
+    color: rgba(243, 243, 243, 0.8);
+}
+
+a.sign-up{
+    color: #F3F3F3;
+    margin-left: 20px;
+}
+
+.owner-desc{
+    font-size: 18px;
+}
+
+/* Main-Content */
+main{
+    align-self: center;
+    margin: 0 0 0 6rem;
+    animation: landing .5s ease-in-out;
+    width: 70%;
+}
+
+main h1, main p, main span, main label{
+    color: #444;
+}
+
+main h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+ .welcoming-desc{
+    margin-top: 10px;
+}
+
+label{
+    display: block;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 35% 35%;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+    "image-area image-area" 
+    "fullname-area email-area"
+    "username-area password-area";
+    gap: 1.5rem;
+}
+
+.register-form{
+    margin-top: 20px;
+}
+
+.image-field{
+    grid-area: image-area;
+}
+
+.fullname-field{
+    grid-area: fullname-area;
+}
+
+.email-field{
+    grid-area: email-area;
+}
+
+.username-field{
+    grid-area: username-area;
+}
+
+.password-field{
+    grid-area: password-area;
+}
+
+.button-field{
+    margin-top: 10px;
+}
+
+.image-upload {
+    display: flex;
+}
+
+label.upload-img{
+    height: 30px;
+    width: 120px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    text-align: center;
+    line-height: 30px;
+    align-self: center;
+    margin-left: 1.5rem;
+    font-weight: 500;
+}
+
+.image-field img {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+}
+
+#fullname, #email, #username, #password, button{
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 5px;
+    border: 2px solid #B3B3B3;
+}
+
+#fullname, #email, #username, #password{
+    height: 45px;
+    outline: 0;
+    padding-left: 5px;
+}
+
+button.sign-up{
+    height: 40px;
+    border: 0;
+    font-weight: bold;
+    color: #F3F3F3;
+    background-color: #323CEA;
+    cursor: pointer;
+}
+
+button.sign-up:hover{
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+    transition: ease-in .25s; 
+    background-color: #1c24bb;
+}
+
+#fullname:focus, #email:focus,  #username:focus, #password:focus{
+    border: 2px solid #323CEA;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+    transition: ease-in .25s; 
+    color: #323CEA;
+}
+
+/* Status validation */
+.status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #F3F3F3;
+}
+
+/* Animation */
+@keyframes landing{
+    0% {
+        transform:translateX(200px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Media Queries */
+@media screen and (max-width:1023px) {
+    /* Global */
+    body {
+        background-color: #323CEA;
+    }
+
+    .body-container{
+        flex-direction: column;
+    }
+
+    /* Aside */
+    aside {
+        height: auto;
+        padding: 1rem 1.5rem;
+        width: 100%;
+        background-color: transparent;
+        box-shadow: none;
+    }
+    
+    aside .container{
+        flex-direction: row;
+    }
+
+    .owner, .auth-desc{
+        display: none;
+    }
+
+    a{
+        font-size: 16px;
+    }
+
+    a.sign-up{
+        margin-left: 10px;  
+    }
+
+    .brand {
+        order: 1;
+    }
+
+    .owner {
+        order: 2;
+    }
+
+    .auth{
+        order: 3;
+        margin: 0;
+    }
+
+    /* Main */
+    main{       
+        margin: 0;
+        width: 100%;
+    }
+
+    main .container{
+        margin: 2rem auto;
+        width: 50%;
+        background-color: #FFF;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        padding: 2rem 3rem;
+    }
+
+    main h1{
+        font-size: 28px;
+    }
+
+    form {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    #username, #password, main button{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px){
+    /* Aside */
+    .brand-name {
+        font-size: 48px;
+    }
+
+    .brand-sub-name {
+        font-size: 12px;
+    }
+
+    /* Main */
+    main .container {
+        padding: 2rem 2rem;
+        width: 80%;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+        grid-template-rows:  1fr 1fr 1fr 1fr;
+        grid-template-areas: 
+        "image-area"
+        "fullname-area"
+        "email-area"
+        "username-area" 
+        "password-area";
+    }
+
+    label.upload-img{
+        width: 50%;
+    }
+}
+
+@media screen and (min-width:1921px){
+    .body-container{
+        width: 1890px;
+    }
+}
+
