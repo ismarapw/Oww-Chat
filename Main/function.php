@@ -169,4 +169,49 @@ function getUserInfo($userId){
     return $row;
 }
 
+
+function sendMessage($msgVal, $userId, $userDestinationId){
+    // get global scope of database
+    global $conn;
+
+    // check empty message value
+    if(preg_match("/^\s*$/", $msgVal)){
+        return "<p>Cannot send empty message</p>";
+    }
+    
+    // check is friend or not yet
+    $query = "SELECT * from friend_list where user_id = '$userId' and friend_id = '$userDestinationId'";
+    mysqli_query($conn, $query);
+    if(mysqli_affected_rows($conn) === 0){
+        // add friend
+        $query = "INSERT INTO friend_list(user_id,friend_id) values ('$userId', '$userDestinationId')";
+        mysqli_query($conn,$query);
+        if(mysqli_error($conn) > 0){
+            return "<p>Error send message</p>".mysqli_error($conn);
+        }
+    }
+
+    // insert text value into chat database
+    for($i = 1 ; $i <= 2 ; $i++){
+        if($i === 1){
+            $user1 = $userId;
+            $user2 = $userDestinationId;
+            $status = "sender";
+        }else{
+            $user1 = $userDestinationId;
+            $user2 = $userId;
+            $status = "receiver";
+        }
+        
+
+        $query = "INSERT INTO text_chat(user_id, friend_id, text,text_status) VALUES ('$user1', '$user2', '$msgVal','$status')";
+        mysqli_query($conn, $query);
+        if(mysqli_error($conn) > 0){
+            return "<p>Error send message</p>".mysqli_error($conn);
+        }
+    }
+    
+    return "message sent";
+}
+
 ?>

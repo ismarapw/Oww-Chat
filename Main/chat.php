@@ -13,7 +13,7 @@ $currentUserId = $_SESSION["currentId"];
 // get user info from function
 $getRow = getUserInfo($currentUserId);
 
-// get user friend list from function
+// get user list from function
 
 ?>
 
@@ -61,15 +61,15 @@ $getRow = getUserInfo($currentUserId);
             </section>
             <section class="friends">
                 <div class="container">
-                     <div class="friend-content">
+                     <!-- <div class="friend-content">
                         <div class="friend-image">
                             <img src="img/user-friend.png" alt="friend-image">
                         </div>
-                        <div class="friend-info">
+                        <div class="friend-last-chat">
                             <h3 class="name">Missxiu</h3>
                             <p class="last-message">Okey, i’ll call you back later</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </section>
             <nav class="edit-profile">
@@ -115,14 +115,8 @@ $getRow = getUserInfo($currentUserId);
                 </div>
             </nav>
         </aside>
-        <main class="conversation">
-            <div class="container">
-                <div class="inactive-chat">
-                    <i class="ri-message-2-line"></i>
-                    <p class="inactive-chat-desc">Start a Conversation</p>
-                </div>
-            </div>
-        </main>
+        <main class="conversation"></main>
+        <div class="message-status"></div>
     </div>
     <script src="script/chat.js"></script>
 </body>

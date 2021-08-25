@@ -15,6 +15,81 @@ closeToggle.addEventListener('click', ()=>{
 });
 
 
+
+
+/* ---------- Send text message ---------- */
+
+// get status message
+const msgStatus = document.getElementsByClassName("message-status")[0];
+
+// ajax function to send text message
+function sendMsg(msgValue, userIdValue){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET','script/ajax/ajax-send-msg.php?msgValue='+msgValue+'&userDestId='+userIdValue, true);
+    xhr.send();
+    xhr.onload = ()=>{
+        if(xhr.readyState === 4 && xhr.status === 200){
+            msgStatus.innerHTML = xhr.responseText;
+
+            // add style for message status
+            if(msgStatus.innerHTML.length > 0){
+                msgStatus.style.padding = "5px 0";
+            }else {
+                msgStatus.style.padding = "0";
+
+                // add text to conversation
+                let newDivSend = document.createElement("div");
+                let parent = document.querySelector(".conversation-area .container");
+                newDivSend.classList.add("sent");
+                newDivSend.innerHTML = "<p class='message'>"+msgValue+"</p>";
+                parent.appendChild(newDivSend);
+
+            }
+        }else{
+            console.log("Error Server Not Found or Busy");
+        }
+    }
+}
+
+
+/* ---------- Get Content Chat ---------- */
+
+// get chat section
+const chatSection = document.getElementsByClassName("conversation")[0];
+
+// ajax function for fetch the chat content
+function getContent(userIdValue){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET','script/ajax/ajax-get-content.php?userId='+userIdValue, true);
+    xhr.send();
+    xhr.onload = ()=>{
+        if(xhr.readyState === 4 && xhr.status === 200){
+            chatSection.innerHTML = xhr.responseText;
+            
+            if(chatSection.querySelector(".friend-profile") !== undefined){
+                // get send button
+                const sendMsgBtn = chatSection.querySelector("#submit-message");
+                
+                // add event if send button is clicked
+                sendMsgBtn.addEventListener('click',()=>{
+                    // get message input value
+                    const msgInput = chatSection.querySelector("#input-message");
+
+                    // call send message function
+                    sendMsg(msgInput.value, userIdValue);
+
+                    // reset input value after message sent
+                    msgInput.value = ""
+                });
+            }
+
+        }else{
+            console.log("Error Server Not Found or Busy");
+        }
+    }
+}
+
+
 /* ---------- Search Somenone ----------*/
 
 // get search element
@@ -35,11 +110,15 @@ function search(inputValue){
             if(searchResult.innerHTML.length > 0){
                 searchResult.style.padding = "20px";
 
-                const user = document.querySelectorAll('.search-result .user');
-                console.log(user);
-                for(let i of user){
-                    i.addEventListener('click',()=>{
-                        console.log("haii");
+                // add event for user search result
+                const users = document.querySelectorAll('.search-result .user');
+                for(let user of users){
+                    user.addEventListener('click',()=>{
+                        // get id user
+                        userId = user.querySelector("#user-id").innerHTML;
+
+                        // get conversation 
+                        getContent(userId);
                     });
                 }
             }else {

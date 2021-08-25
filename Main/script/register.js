@@ -17,17 +17,13 @@ function submitForm(form){
             // add status value from ajax
             status.innerHTML = xhr.responseText;
 
-            // add style if status is appear
+            // add style if status is appear or redirect if succesfull(no status appear)
             if(status.innerHTML.length > 0){
                 status.style.padding = "5px 0";
             }else {
                 status.style.padding = "0";
-            }
-
-            // Redirect if succesfull (status not appear)
-            if(status.innerHTML.length === 0){
                 document.location.href = 'chat.php';
-            }    
+            }
         }else{
             console.log("Error Server Not Found or Busy");
         }

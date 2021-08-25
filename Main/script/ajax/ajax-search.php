@@ -10,6 +10,7 @@ if($searchStatus === "not found"){
 }else {
     $userList = $searchStatus;
     foreach($userList as $user){
+        $userid = $user["user_id"];
         $username = $user["username"];
         $fullname = $user["fullname"];
         $userImg = $user["profile_image"];
@@ -24,6 +25,7 @@ if($searchStatus === "not found"){
                 <div class = $userInfoClass>
                     <h1>$username</h1> 
                     <p>$fullname</p> 
+                    <p id='user-id' style='display:none;'>$userid</p>
                 </div>
               </div>";
     }
