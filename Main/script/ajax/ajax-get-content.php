@@ -13,13 +13,7 @@ $userImage = $getRow['profile_image'];
 $userFullName = $getRow['fullname'];
 
 // get user message
-$messgaeContent = getMessageContent($currentId, $userId);
-
-if($messgaeContent === "no message"){
-    // do something
-}else {
-    $messageList = $messgaeContent;
-}
+$messageContent = getMessageContent($currentId, $userId);
 
 ?>
 <header class='friend-profile'>
@@ -45,17 +39,22 @@ if($messgaeContent === "no message"){
 </header>
 <section class='conversation-area'>
     <div class='container'>
-    <?php foreach($messageList as $message) :?>
-        <?php if($message["from_id"] === $currentId and $message["to_id"] === $userId): ?>
-            <div class="sent">
-                <p class="message"><?php echo $message["text"] ?></p>
-            </div>
-        <?php else :?>
-            <div class="reply">
-                <p class="message"><?php echo $message["text"] ?></p>
-            </div>
-        <?php endif ?>
-    <?php endforeach ?>
+    <?php if($messageContent === "no message") : ?>
+        <p>Start your message</p>
+    <?php else:?>
+        <?php $messageList = $messageContent; ?>
+        <?php foreach($messageList as $message) :?>
+            <?php if($message["from_id"] === $currentId and $message["to_id"] === $userId): ?>
+                <div class="sent">
+                    <p class="message"><?php echo $message["text"] ?></p>
+                </div>
+            <?php else :?>
+                <div class="reply">
+                    <p class="message"><?php echo $message["text"] ?></p>
+                </div>
+            <?php endif ?>
+        <?php endforeach ?>
+    <?php endif ?>
     </div>
 </section>
 <section class='send-area'>
