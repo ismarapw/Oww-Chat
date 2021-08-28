@@ -15,8 +15,6 @@ closeToggle.addEventListener('click', ()=>{
 });
 
 
-
-
 /* ---------- Send text message ---------- */
 
 // get status message
@@ -43,7 +41,6 @@ function sendMsg(msgValue, userIdValue){
                 newDivSend.classList.add("sent");
                 newDivSend.innerHTML = "<p class='message'>"+msgValue+"</p>";
                 parent.appendChild(newDivSend);
-
             }
         }else{
             console.log("Error Server Not Found or Busy");
@@ -66,7 +63,7 @@ function getContent(userIdValue){
         if(xhr.readyState === 4 && xhr.status === 200){
             chatSection.innerHTML = xhr.responseText;
             
-            if(chatSection.querySelector(".friend-profile") !== undefined){
+            if(chatSection.innerHTML.length > 0){
                 // get send button
                 const sendMsgBtn = chatSection.querySelector("#submit-message");
                 
@@ -83,6 +80,34 @@ function getContent(userIdValue){
                 });
             }
 
+        }else{
+            console.log("Error Server Not Found or Busy");
+        }
+    }
+}
+
+/* ---------- Wait reply text message ---------- */
+
+// get msg element
+let userId = 0;
+
+// ajax function to wait text message
+function waitMsg(userIdValue){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET','script/ajax/ajax-wait-msg.php?userId='+userIdValue, true);
+    xhr.send();
+    xhr.onload = ()=>{
+        if(xhr.readyState === 4 && xhr.status === 200){
+            // add style for message status
+            if(xhr.responseText.length > 0){
+                // add text to conversation
+                let newDivReply = document.createElement("div");
+                let parent = document.querySelector(".conversation-area .container");
+                newDivReply.classList.add("reply");
+                newDivReply.innerHTML = "<p class='message'>"+xhr.responseText+"</p>";
+                parent.appendChild(newDivReply);
+                console.log(xhr.responseText);
+            }
         }else{
             console.log("Error Server Not Found or Busy");
         }
@@ -129,6 +154,16 @@ function search(inputValue){
         }
     }
 }
+
+
+
+// // add event for live message
+// setInterval(() => {
+//     if(chatSection.innerHTML.length > 0){
+//         waitMsg(userId);
+//     }
+// }, 1000);
+
 
 // add event for input field
 searchInput.addEventListener('keyup', ()=>{

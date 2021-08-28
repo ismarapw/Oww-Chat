@@ -99,7 +99,7 @@ function register($fullname,$email, $username, $password, $image){
     
     // check error sql
     if(mysqli_error($conn) > 0){
-        return mysqli_error($conn);
+        return "<p>Error cannot register into database</p> ".mysqli_error($conn);
     }else {
         return "inserted";
     }
@@ -179,39 +179,63 @@ function sendMessage($msgVal, $userId, $userDestinationId){
         return "<p>Cannot send empty message</p>";
     }
     
-    // check is friend or not yet
-    $query = "SELECT * from friend_list where user_id = '$userId' and friend_id = '$userDestinationId'";
+    // check person list
+    $query = "SELECT * from person_list where user1_id = '$userId' and user2_id = '$userDestinationId' OR user1_id = '$userDestinationId' and user2_id = '$userId'";
     mysqli_query($conn, $query);
     if(mysqli_affected_rows($conn) === 0){
-        // add friend
-        $query = "INSERT INTO friend_list(user_id,friend_id) values ('$userId', '$userDestinationId')";
+        // add in person list
+        $query = "INSERT INTO person_list(user1_id,user2_id) values ('$userId', '$userDestinationId')";
         mysqli_query($conn,$query);
         if(mysqli_error($conn) > 0){
-            return "<p>Error send message</p>".mysqli_error($conn);
+            return "<p>Error send message</p> ".mysqli_error($conn);
         }
     }
 
     // insert text value into chat database
-    for($i = 1 ; $i <= 2 ; $i++){
-        if($i === 1){
-            $user1 = $userId;
-            $user2 = $userDestinationId;
-            $status = "sender";
-        }else{
-            $user1 = $userDestinationId;
-            $user2 = $userId;
-            $status = "receiver";
-        }
-        
-
-        $query = "INSERT INTO text_chat(user_id, friend_id, text,text_status) VALUES ('$user1', '$user2', '$msgVal','$status')";
-        mysqli_query($conn, $query);
-        if(mysqli_error($conn) > 0){
-            return "<p>Error send message</p>".mysqli_error($conn);
-        }
+    $query = "INSERT INTO chat_text(from_id,to_id, text) VALUES ('$userId', '$userDestinationId', '$msgVal')";
+    mysqli_query($conn, $query);
+    if(mysqli_error($conn) > 0){
+        return "<p>Error send message</p> ".mysqli_error($conn);
+    }else {
+        return "message sent";
     }
     
-    return "message sent";
+}
+
+function liveMessage($userId, $userDestinationId){
+    // get global scope of database
+    global $conn;  
+
+    // query message
+    $query = "SELECT text from text_chat where user_id = 3 and friend_id = 4";
+    $result = mysqli_query($conn, $query);
+    if(mysqli_affected_rows($conn) > 0){
+        $row = mysqli_fetch_assoc($result);  
+        $msg = $row["text"];
+        return $msg;                    
+    }else {
+        return "no message yet";
+    }
+}
+
+
+function getMessageContent($userId, $userDestinationId){
+    // do some stuff
+    global $conn;
+
+    // query all message
+    $query = "SELECT * from chat_text where from_id = $userId and to_id = $userDestinationId OR from_id = $userDestinationId and to_id = $userId";
+    $result = mysqli_query($conn, $query);
+
+    if(mysqli_affected_rows($conn) > 0){
+        $allMsg = [];
+        while($row = mysqli_fetch_assoc($result)){
+            $allMsg[] = $row;
+        }
+        return $allMsg;
+    }else {
+        return "no message";
+    }
 }
 
 ?>

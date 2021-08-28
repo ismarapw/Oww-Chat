@@ -1,6 +1,8 @@
 <?php
-require "../../function.php";
+session_start();
 
+require "../../function.php";
+$currentId = $_SESSION["currentId"];
 $userId = $_GET["userId"];
 
 // get user info from function
@@ -10,15 +12,24 @@ $getRow = getUserInfo($userId);
 $userImage = $getRow['profile_image'];
 $userFullName = $getRow['fullname'];
 
-echo "
+// get user message
+$messgaeContent = getMessageContent($currentId, $userId);
+
+if($messgaeContent === "no message"){
+    // do something
+}else {
+    $messageList = $messgaeContent;
+}
+
+?>
 <header class='friend-profile'>
     <div class='container'>
         <div class='friend-content'>
             <div class='friend-image'>
-                <img src='img/$userImage' alt='profile-image'>
+                <img src='img/<?php echo $userImage ?>' alt='profile-image'>
             </div>
             <div class='friend-info'>
-                <h3 class='name'>$userFullName</h3>
+                <h3 class='name'><?php echo $userFullName ?></h3>
                 <div class='status'>
                     <span class='indicator'></span>
                     <span class='indicator-desc'>Online</span>
@@ -34,6 +45,17 @@ echo "
 </header>
 <section class='conversation-area'>
     <div class='container'>
+    <?php foreach($messageList as $message) :?>
+        <?php if($message["from_id"] === $currentId and $message["to_id"] === $userId): ?>
+            <div class="sent">
+                <p class="message"><?php echo $message["text"] ?></p>
+            </div>
+        <?php else :?>
+            <div class="reply">
+                <p class="message"><?php echo $message["text"] ?></p>
+            </div>
+        <?php endif ?>
+    <?php endforeach ?>
     </div>
 </section>
 <section class='send-area'>
@@ -45,53 +67,4 @@ echo "
             </button>
         </form>
     </div>
-</section>"
-?>
-<!-- <div class="sent">
-            <p class="message">Xiu, Can we meet up on sunday?</p>
-        </div>
-        <div class="reply">
-            <p class="message">Sure, but for what ?</p>
-        </div>
-        <div class="reply">
-            <p class="message">Btw, do you make money through photography?</p>
-        </div>
-        <div class="sent">
-            <p class="message">To discuss the business that we will build</p>
-        </div>
-        <div class="sent">
-            <p class="message">Yes, exactly i make money through photograpy every week.</p>
-        </div>
-        <div class="reply">
-            <p class="message">Ohh, oke i see you later, give me further information for the location</p>
-        </div>
-        <div class="reply">
-            <p class="message">Wow that’s amazing</p>
-        </div>
-        <div class="sent">
-            <p class="message">Okey, i’ll call you back later</p>
-        </div>
-        <div class="sent">
-            <p class="message">Xiu, Can we meet up on sunday?</p>
-        </div>
-        <div class="reply">
-            <p class="message">Sure, but for what ?</p>
-        </div>
-        <div class="reply">
-            <p class="message">Btw, do you make money through photography?</p>
-        </div>
-        <div class="sent">
-            <p class="message">To discuss the business that we will build</p>
-        </div>
-        <div class="sent">
-            <p class="message">Yes, exactly i make money through photograpy every week.</p>
-        </div>
-        <div class="reply">
-            <p class="message">Ohh, oke i see you later, give me further information for the location</p>
-        </div>
-        <div class="reply">
-            <p class="message">Wow that’s amazing</p>
-        </div>
-        <div class="sent">
-            <p class="message">Okey, i’ll call you back later</p>
-        </div> -->
+</section>
