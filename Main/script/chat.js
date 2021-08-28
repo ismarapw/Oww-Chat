@@ -1,3 +1,5 @@
+var userIdTarget = 0;
+
 /* ---------- Nav Toggler -------- */
 
 // get nav bar elements
@@ -13,6 +15,24 @@ editToggle.addEventListener('click', ()=>{
 closeToggle.addEventListener('click', ()=>{
     nav.classList.remove('nav-appear');
 });
+
+
+/* ---------- Friend list ----------*/
+
+// get friend list element
+const friendList = document.getElementsByClassName("friend-content");
+
+// add event for friend list
+for (let i = 0 ; i < friendList.length ; i++){
+    friendList[i].addEventListener('click', ()=>{
+        // get id user
+        userIdTarget = friendList[i].querySelector(".user-id").innerHTML;
+
+        // get conversation 
+        getContent(userIdTarget);
+    });
+}
+
 
 
 /* ---------- Send text message ---------- */
@@ -66,6 +86,10 @@ function getContent(userIdValue){
             if(chatSection.innerHTML.length > 0){
                 // get send button
                 const sendMsgBtn = chatSection.querySelector("#submit-message");
+
+                // scroll to bottom
+                let height = chatSection.querySelector(".conversation-area").scrollHeight;
+                chatSection.querySelector(".conversation-area").scrollTo(0, height);
                 
                 // add event if send button is clicked
                 sendMsgBtn.addEventListener('click',()=>{
@@ -76,38 +100,11 @@ function getContent(userIdValue){
                     sendMsg(msgInput.value, userIdValue);
 
                     // reset input value after message sent
-                    msgInput.value = ""
+                    msgInput.value = "";
+                    
                 });
             }
 
-        }else{
-            console.log("Error Server Not Found or Busy");
-        }
-    }
-}
-
-/* ---------- Wait reply text message ---------- */
-
-// get msg element
-let userId = 0;
-
-// ajax function to wait text message
-function waitMsg(userIdValue){
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET','script/ajax/ajax-wait-msg.php?userId='+userIdValue, true);
-    xhr.send();
-    xhr.onload = ()=>{
-        if(xhr.readyState === 4 && xhr.status === 200){
-            // add style for message status
-            if(xhr.responseText.length > 0){
-                // add text to conversation
-                let newDivReply = document.createElement("div");
-                let parent = document.querySelector(".conversation-area .container");
-                newDivReply.classList.add("reply");
-                newDivReply.innerHTML = "<p class='message'>"+xhr.responseText+"</p>";
-                parent.appendChild(newDivReply);
-                console.log(xhr.responseText);
-            }
         }else{
             console.log("Error Server Not Found or Busy");
         }
@@ -120,6 +117,7 @@ function waitMsg(userIdValue){
 // get search element
 const searchInput = document.getElementById("search-input");
 const searchResult = document.getElementsByClassName("search-result")[0];
+
 
 // ajax function for search
 function search(inputValue){
@@ -140,7 +138,7 @@ function search(inputValue){
                 for(let user of users){
                     user.addEventListener('click',()=>{
                         // get id user
-                        userId = user.querySelector("#user-id").innerHTML;
+                        userIdTarget = user.querySelector(".user-id").innerHTML;
 
                         // get conversation 
                         getContent(userId);
@@ -155,19 +153,36 @@ function search(inputValue){
     }
 }
 
-
-
-// // add event for live message
-// setInterval(() => {
-//     if(chatSection.innerHTML.length > 0){
-//         waitMsg(userId);
-//     }
-// }, 1000);
-
-
 // add event for input field
 searchInput.addEventListener('keyup', ()=>{
     search(searchInput.value);
 });
 
 
+
+/* ---------- Live text message ---------- */
+
+// ajax function to wait text message
+function liveMsg(liveSection, userIdValue){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET','script/ajax/ajax-live-msg.php?userId='+userIdValue, true);
+    xhr.send();
+    xhr.onload = ()=>{
+        if(xhr.readyState === 4 && xhr.status === 200){
+            // console.log("baik");
+            liveSection.innerHTML = xhr.responseText;
+        }else{
+            console.log("Error Server Not Found or Busy");
+        }
+    }
+}
+
+
+// add event for live message
+setInterval(() => {
+    if(chatSection.innerHTML.length > 0){
+        // get live component
+        const liveSection = document.querySelector(".conversation-area .container");
+        liveMsg(liveSection, userIdTarget);
+    }
+}, 1000);

@@ -25,7 +25,7 @@ if($searchStatus === "not found"){
                 <div class = $userInfoClass>
                     <h1>$username</h1> 
                     <p>$fullname</p> 
-                    <p id='user-id' style='display:none;'>$userid</p>
+                    <p class='user-id' style='display:none;'>$userid</p>
                 </div>
               </div>";
     }

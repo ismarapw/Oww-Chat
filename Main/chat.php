@@ -13,7 +13,9 @@ $currentUserId = $_SESSION["currentId"];
 // get user info from function
 $getRow = getUserInfo($currentUserId);
 
-// get user list from function
+// get user friend list
+$getRowFriendList = getUserFriendList($currentUserId);
+
 
 ?>
 
@@ -61,15 +63,23 @@ $getRow = getUserInfo($currentUserId);
             </section>
             <section class="friends">
                 <div class="container">
-                     <!-- <div class="friend-content">
-                        <div class="friend-image">
-                            <img src="img/user-friend.png" alt="friend-image">
-                        </div>
-                        <div class="friend-last-chat">
-                            <h3 class="name">Missxiu</h3>
-                            <p class="last-message">Okey, i’ll call you back later</p>
-                        </div>
-                    </div> -->
+                <?php if($getRowFriendList === "no friend yet") : ?>
+                    <p>No Friend Yet</p>
+                <?php else : ?>
+                    <?php foreach($getRowFriendList as $friend) :?>
+                        <div class="friend-content">
+                           <div class="friend-image">
+                               <img src="img/<?php echo $friend["profile_image"] ?>" alt="friend-image">
+                           </div>
+                           <div class="friend-last-chat">
+                               <h3 class="name"><?php echo $friend["fullname"] ?></h3>
+                               <?php  $lastMessage = getLastMessage($currentUserId, $friend["user_id"]); ?>
+                               <p class="last-message"><?php echo $lastMessage ?></p>
+                           </div>
+                           <div class="user-id" style="display: none;"><?php echo $friend["user_id"] ?></div>
+                       </div>
+                    <?php endforeach ?>
+                <?php endif ?>
                 </div>
             </section>
             <nav class="edit-profile">

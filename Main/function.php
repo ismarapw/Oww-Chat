@@ -169,6 +169,26 @@ function getUserInfo($userId){
     return $row;
 }
 
+function getUserFriendList($userId){
+    // get global scope of database
+    global $conn;
+
+    // get list of friend
+    $query ="SELECT * FROM person_list, users where person_list.user1_id = $userId and person_list.user2_id = users.user_id OR person_list.user2_id = $userId and person_list.user1_id = users.user_id";
+    $result = mysqli_query($conn, $query);
+    if(mysqli_affected_rows($conn) > 0){
+        $friendList = [];
+        while($row = mysqli_fetch_assoc($result)){
+            $friendList[] = $row;
+        }
+
+        return $friendList;
+    }else {
+        return "no friend yet";
+    }
+
+}
+
 
 function sendMessage($msgVal, $userId, $userDestinationId){
     // get global scope of database
@@ -202,31 +222,15 @@ function sendMessage($msgVal, $userId, $userDestinationId){
     
 }
 
-function liveMessage($userId, $userDestinationId){
-    // get global scope of database
-    global $conn;  
-
-    // query message
-    $query = "SELECT text from text_chat where user_id = 3 and friend_id = 4";
-    $result = mysqli_query($conn, $query);
-    if(mysqli_affected_rows($conn) > 0){
-        $row = mysqli_fetch_assoc($result);  
-        $msg = $row["text"];
-        return $msg;                    
-    }else {
-        return "no message yet";
-    }
-}
-
 
 function getMessageContent($userId, $userDestinationId){
     // do some stuff
     global $conn;
-
+    
     // query all message
     $query = "SELECT * from chat_text where from_id = $userId and to_id = $userDestinationId OR from_id = $userDestinationId and to_id = $userId";
     $result = mysqli_query($conn, $query);
-
+    
     if(mysqli_affected_rows($conn) > 0){
         $allMsg = [];
         while($row = mysqli_fetch_assoc($result)){
@@ -238,4 +242,16 @@ function getMessageContent($userId, $userDestinationId){
     }
 }
 
+function getLastMessage($userId, $userDestinationId){
+    // do some stuff
+    global $conn;
+
+    // query message
+    $query = "SELECT * from chat_text where from_id = $userId and to_id = $userDestinationId OR from_id = $userDestinationId and to_id = $userId ORDER BY time DESC";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    $lastMsg = $row["text"];
+
+    return $lastMsg;
+}
 ?>
