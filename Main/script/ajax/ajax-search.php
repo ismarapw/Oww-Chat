@@ -1,10 +1,13 @@
 <?php
+session_start();
 require "../../function.php";
 
-$searchStatus =  searchUser($_GET["inputVal"]);
+$currentId = $_SESSION["currentId"];
+
+$searchStatus =  searchUser($_GET["inputVal"],$currentId);
 
 if($searchStatus === "not found"){
-    echo "<p>User not found</p>";
+    echo "<p>Username not found</p>";
 }else if($searchStatus === "blank value"){
     echo "";
 }else {
@@ -25,7 +28,7 @@ if($searchStatus === "not found"){
                 <div class = $userInfoClass>
                     <h1>$username</h1> 
                     <p>$fullname</p> 
-                    <p class='user-id' style='display:none;'>$userid</p>
+                    <p class='user-id-res' style='display:none;'>$userid</p>
                 </div>
               </div>";
     }

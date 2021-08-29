@@ -1,3 +1,5 @@
+/* ---------- Global Variabel for user target id -------- */
+
 var userIdTarget = 0;
 
 /* ---------- Nav Toggler -------- */
@@ -17,21 +19,8 @@ closeToggle.addEventListener('click', ()=>{
 });
 
 
-/* ---------- Friend list ----------*/
 
-// get friend list element
-const friendList = document.getElementsByClassName("friend-content");
 
-// add event for friend list
-for (let i = 0 ; i < friendList.length ; i++){
-    friendList[i].addEventListener('click', ()=>{
-        // get id user
-        userIdTarget = friendList[i].querySelector(".user-id").innerHTML;
-
-        // get conversation 
-        getContent(userIdTarget);
-    });
-}
 
 
 
@@ -42,9 +31,11 @@ const msgStatus = document.getElementsByClassName("message-status")[0];
 
 // ajax function to send text message
 function sendMsg(msgValue, userIdValue){
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET','script/ajax/ajax-send-msg.php?msgValue='+msgValue+'&userDestId='+userIdValue, true);
     xhr.send();
+
     xhr.onload = ()=>{
         if(xhr.readyState === 4 && xhr.status === 200){
             msgStatus.innerHTML = xhr.responseText;
@@ -61,6 +52,10 @@ function sendMsg(msgValue, userIdValue){
                 newDivSend.classList.add("sent");
                 newDivSend.innerHTML = "<p class='message'>"+msgValue+"</p>";
                 parent.appendChild(newDivSend);
+
+                // scroll to bottom
+                let height = chatSection.querySelector(".conversation-area").scrollHeight;
+                chatSection.querySelector(".conversation-area").scrollTo(0, height);            
             }
         }else{
             console.log("Error Server Not Found or Busy");
@@ -69,10 +64,12 @@ function sendMsg(msgValue, userIdValue){
 }
 
 
+
 /* ---------- Get Content Chat ---------- */
 
 // get chat section
 const chatSection = document.getElementsByClassName("conversation")[0];
+
 
 // ajax function for fetch the chat content
 function getContent(userIdValue){
@@ -83,13 +80,36 @@ function getContent(userIdValue){
         if(xhr.readyState === 4 && xhr.status === 200){
             chatSection.innerHTML = xhr.responseText;
             
-            if(chatSection.innerHTML.length > 0){
+            if(chatSection.querySelector(".start-message") === null){
+                // add event on mobile width
+                const content = document.querySelector("main.conversation");
+                const sideBar = document.querySelector("aside.persons-chat");
+                if(window.innerWidth < 768){
+                    const backBtn = document.querySelector(".ri-arrow-left-line");
+                    
+                    content.style.display = "block";
+                    content.style.width = "100%"; 
+                    sideBar.style.width = "0%";
+
+                    backBtn.addEventListener('click', ()=>{
+                        content.style.display = "none";
+                        content.style.width = "0%"; 
+                        sideBar.style.width = "100%";
+                    });
+                }else{
+                    const backBtn = document.querySelector(".ri-arrow-left-line");
+                    backBtn.style.display = "none";
+                }
+
+
+
                 // get send button
                 const sendMsgBtn = chatSection.querySelector("#submit-message");
 
                 // scroll to bottom
                 let height = chatSection.querySelector(".conversation-area").scrollHeight;
                 chatSection.querySelector(".conversation-area").scrollTo(0, height);
+
                 
                 // add event if send button is clicked
                 sendMsgBtn.addEventListener('click',()=>{
@@ -100,9 +120,10 @@ function getContent(userIdValue){
                     sendMsg(msgInput.value, userIdValue);
 
                     // reset input value after message sent
-                    msgInput.value = "";
-                    
+                    msgInput.value = ""; 
                 });
+
+
             }
 
         }else{
@@ -110,6 +131,7 @@ function getContent(userIdValue){
         }
     }
 }
+
 
 
 /* ---------- Search Somenone ----------*/
@@ -138,10 +160,13 @@ function search(inputValue){
                 for(let user of users){
                     user.addEventListener('click',()=>{
                         // get id user
-                        userIdTarget = user.querySelector(".user-id").innerHTML;
+                        userIdTarget = user.querySelector(".user-id-res").innerHTML;
 
                         // get conversation 
-                        getContent(userId);
+                        getContent(userIdTarget);
+
+                        // close search box
+                        searchResult.style.display = "none";
                     });
                 }
             }else {
@@ -155,6 +180,7 @@ function search(inputValue){
 
 // add event for input field
 searchInput.addEventListener('keyup', ()=>{
+    searchResult.style.display = "block";
     search(searchInput.value);
 });
 
@@ -169,7 +195,6 @@ function liveMsg(liveSection, userIdValue){
     xhr.send();
     xhr.onload = ()=>{
         if(xhr.readyState === 4 && xhr.status === 200){
-            // console.log("baik");
             liveSection.innerHTML = xhr.responseText;
         }else{
             console.log("Error Server Not Found or Busy");
@@ -180,9 +205,49 @@ function liveMsg(liveSection, userIdValue){
 
 // add event for live message
 setInterval(() => {
-    if(chatSection.innerHTML.length > 0){
+    if(chatSection.querySelector(".start-message") === null){
         // get live component
         const liveSection = document.querySelector(".conversation-area .container");
         liveMsg(liveSection, userIdTarget);
     }
 }, 1000);
+
+
+
+/* ---------- Live friend list ---------- */
+
+function liveFriend(liveSection){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET','script/ajax/ajax-life-friendlist.php', true);
+    xhr.send();
+    xhr.onload = ()=>{
+        if(xhr.readyState === 4 && xhr.status === 200){
+            liveSection.innerHTML = xhr.responseText;
+
+            // get friend list element
+            const friendList = liveSection.getElementsByClassName("friend-content");
+
+            // add event for friend list
+            for (let i = 0 ; i < friendList.length ; i++){
+                friendList[i].addEventListener('click', ()=>{
+                    // get id user
+                    userIdTarget = friendList[i].querySelector(".user-id").innerHTML;
+
+                    // get conversation 
+                    getContent(userIdTarget);
+                });
+            }
+        }else{
+            console.log("Error Server Not Found or Busy");
+        }
+    }
+}
+
+setInterval(() => {
+    // get live component
+    const liveFriendList = document.querySelector(".friends .container");
+    liveFriend(liveFriendList);
+
+}, 1000);
+
+

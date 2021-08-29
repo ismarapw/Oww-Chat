@@ -7,7 +7,7 @@ $liveMessage = getMessageContent($currentId, $_GET["userId"]);
 
 ?>
 <?php if($liveMessage === "no message") : ?>
-    <p>Start your message</p>
+    <p style="display: flex; height:100%; justify-content:center; margin-top:0.25rem;">Start your message</p>
 <?php else:?>
     <?php $messageList = $liveMessage; ?>
     <?php foreach($messageList as $message) :?>

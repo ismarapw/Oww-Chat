@@ -19,6 +19,7 @@ $messageContent = getMessageContent($currentId, $userId);
 <header class='friend-profile'>
     <div class='container'>
         <div class='friend-content'>
+            <i class="ri-arrow-left-line"></i>
             <div class='friend-image'>
                 <img src='img/<?php echo $userImage ?>' alt='profile-image'>
             </div>
@@ -40,7 +41,7 @@ $messageContent = getMessageContent($currentId, $userId);
 <section class='conversation-area'>
     <div class='container'>
     <?php if($messageContent === "no message") : ?>
-        <p>Start your message</p>
+        <p style="display: flex; height:100%; justify-content:center; align-items:center; margin-top:0.25rem;">Start your message</p>
     <?php else:?>
         <?php $messageList = $messageContent; ?>
         <?php foreach($messageList as $message) :?>
@@ -59,11 +60,9 @@ $messageContent = getMessageContent($currentId, $userId);
 </section>
 <section class='send-area'>
     <div class='container'>
-        <form method='POST' class='message-form'>
-            <input type='text' name='input-message' id='input-message' placeholder='Start typing your message' autocomplete='off' required>
-            <button type='button' id='submit-message'>                           
-                <i class='ri-send-plane-fill'></i>
-            </button>
-        </form>
+        <input type='text' name='input-message' id='input-message' placeholder='Start typing your message' autocomplete='off' required>
+        <button type='button' id='submit-message'>                           
+            <i class='ri-send-plane-fill'></i>
+        </button>
     </div>
 </section>

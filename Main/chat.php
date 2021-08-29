@@ -64,7 +64,7 @@ $getRowFriendList = getUserFriendList($currentUserId);
             <section class="friends">
                 <div class="container">
                 <?php if($getRowFriendList === "no friend yet") : ?>
-                    <p>No Friend Yet</p>
+                    <p style="display: flex; height:100%; justify-content:center; margin-top:1rem;">No chat list yet</p>
                 <?php else : ?>
                     <?php foreach($getRowFriendList as $friend) :?>
                         <div class="friend-content">
@@ -73,7 +73,7 @@ $getRowFriendList = getUserFriendList($currentUserId);
                            </div>
                            <div class="friend-last-chat">
                                <h3 class="name"><?php echo $friend["fullname"] ?></h3>
-                               <?php  $lastMessage = getLastMessage($currentUserId, $friend["user_id"]); ?>
+                               <?php $lastMessage = getLastMessage($currentUserId, $friend["user_id"]); ?>
                                <p class="last-message"><?php echo $lastMessage ?></p>
                            </div>
                            <div class="user-id" style="display: none;"><?php echo $friend["user_id"] ?></div>
@@ -125,7 +125,7 @@ $getRowFriendList = getUserFriendList($currentUserId);
                 </div>
             </nav>
         </aside>
-        <main class="conversation"></main>
+        <main class="conversation"><p class="start-message">Select a chat to start messaging</p></main>
         <div class="message-status"></div>
     </div>
     <script src="script/chat.js"></script>

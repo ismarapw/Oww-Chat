@@ -61,6 +61,7 @@ aside.persons-chat {
     width: 30%;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.25);
     position: relative;
+    z-index: 2;
     overflow-x: hidden;  
 }
 
@@ -197,14 +198,17 @@ section .friend-content {
     margin-top: 1rem;
 }
 
-.friend-content:hover {
-    background-color: rgba(0, 0, 0, .15);
-    transition: .15s;
-}
-
 .friend-last-chat{
     align-self: center;
     margin-left: 10px;
+}
+
+.last-message {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 13rem;
+    display: inline-block;
+    overflow: hidden;
 }
 
 .friends h3, .friends p {
@@ -392,6 +396,10 @@ main .friend-profile{
     color: #444;
 }
 
+.friend-image {
+    margin-left: 0.5rem;
+}
+
 .option-toggle{
     margin-top: 15px;
 }
@@ -407,9 +415,14 @@ main .friend-profile{
     margin-top: 2px;
 }
 
+.ri-arrow-left-line{
+    align-self: center;
+    font-size: 1.2rem;
+}
+
 /* Main - conversation area */
 section.conversation-area{
-    padding: 1rem 2rem 6rem 1.25rem;
+    padding: 1rem 1rem 6rem 1.25rem;
     overflow-y: scroll;
     height: calc(100vh - 90px);
 }
@@ -485,14 +498,22 @@ section.send-area {
 
 /* status message */
 .message-status {
-    position: absolute;
-    top: 0;
+    position: fixed;
+    bottom: 0;
     left: 0;
     right: 0;
     display: flex;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.5);
     color: #F3F3F3;
+    z-index: 3;
+}
+
+.start-message{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Media Queries */
@@ -511,12 +532,12 @@ section.send-area {
 @media screen and (max-width: 768px){
     /* Aside, Navbar */
     aside.persons-chat{
-        display: none;
+        width: 100%;
     }
     
     /* main */
     main.conversation{
-        width: 100%;
+        display: none;
     }
 }
 

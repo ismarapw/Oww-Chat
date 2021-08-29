@@ -134,7 +134,7 @@ function login($username, $password){
     }
 }
 
-function searchUser($inputValue){
+function searchUser($inputValue, $userId){
     // get global scope of database
     global $conn;
 
@@ -143,7 +143,7 @@ function searchUser($inputValue){
     }
 
     // Search user in database
-    $query = "SELECT * from users where username like '%$inputValue%'";
+    $query = "SELECT * from users where username like '%$inputValue%' and user_id != '$userId'";
     $result = mysqli_query($conn, $query);
     if(mysqli_affected_rows($conn) > 0){
         $users = [];
@@ -174,7 +174,7 @@ function getUserFriendList($userId){
     global $conn;
 
     // get list of friend
-    $query ="SELECT * FROM person_list, users where person_list.user1_id = $userId and person_list.user2_id = users.user_id OR person_list.user2_id = $userId and person_list.user1_id = users.user_id";
+    $query ="SELECT * FROM person_list, users where person_list.user1_id = $userId and person_list.user2_id = users.user_id OR person_list.user2_id = $userId and person_list.user1_id = users.user_id ORDER BY time DESC";
     $result = mysqli_query($conn, $query);
     if(mysqli_affected_rows($conn) > 0){
         $friendList = [];
