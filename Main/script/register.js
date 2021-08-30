@@ -22,7 +22,7 @@ function submitForm(form){
                 status.style.padding = "5px 0";
             }else {
                 status.style.padding = "0";
-                document.location.href = 'chat.php';
+                document.location.href = 'list.php';
             }
         }else{
             console.log("Error Server Not Found or Busy");

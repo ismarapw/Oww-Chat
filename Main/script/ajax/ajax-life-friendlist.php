@@ -12,7 +12,7 @@ $getRowFriendList = getUserFriendList($currentId);
     <p style="display: flex; height:100%; justify-content:center; margin-top:1rem;">No chat list yet</p>
 <?php else : ?>
     <?php foreach($getRowFriendList as $friend) :?>
-        <div class="friend-content">
+        <a class="friend-content" href="chat.php?user-target-id=<?php echo $friend["user_id"] ?>">
             <div class="friend-image">
                 <img src="img/<?php echo $friend["profile_image"] ?>" alt="friend-image">
             </div>
@@ -21,7 +21,6 @@ $getRowFriendList = getUserFriendList($currentId);
                 <?php  $lastMessage = getLastMessage($currentId, $friend["user_id"]); ?>
                 <p class="last-message"><?php echo $lastMessage ?></p>
             </div>
-            <div class="user-id" style="display: none;"><?php echo $friend["user_id"] ?></div>
-        </div>
+        </a>
     <?php endforeach ?>
 <?php endif ?>

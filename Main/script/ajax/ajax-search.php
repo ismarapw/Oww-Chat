@@ -18,19 +18,19 @@ if($searchStatus === "not found"){
         $fullname = $user["fullname"];
         $userImg = $user["profile_image"];
         $imagePath = "img/$userImg";
+        $href = "chat.php?user-target-id=$userid";
         $userClass = "user";
         $userImageClass = "image-field";
         $userInfoClass = "info-field";
-        echo "<div class=$userClass>
+        echo "<a class=$userClass href=$href>
                 <div class=$userImageClass>
                     <img src=$imagePath>
                 </div>
                 <div class = $userInfoClass>
                     <h1>$username</h1> 
                     <p>$fullname</p> 
-                    <p class='user-id-res' style='display:none;'>$userid</p>
                 </div>
-              </div>";
+              </>";
     }
 }
 
