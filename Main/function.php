@@ -134,6 +134,126 @@ function login($username, $password){
     }
 }
 
+function editImage($file,$oldFile, $userId){
+    global $conn;
+
+    // get file info
+    $fileName = $file["name"];
+    $fileSize = $file["size"];
+    $fileTmp = $file["tmp_name"];
+
+
+    if($fileName === ""){
+        return $oldFile;
+    }
+
+    //valid extension initialization
+    $validFile = ["jpg","jpeg","png"];
+    $explodeFile = explode(".", $fileName);
+    $fileExt = strtolower(end($explodeFile));
+
+    // check file extension
+    if(!in_array($fileExt, $validFile)){
+        return "not valid extension";
+    }else{
+        // check file size
+        if($fileSize > 1000000){
+            return "file's to big";
+        }else {
+            // check old file name
+            $query = "SELECT profile_image from users where user_id = '$userId'";
+            $result = mysqli_query($conn, $query);
+            $row = mysqli_fetch_assoc($result);
+            $oldImageName = $row["profile_image"];
+            if($fileName === $oldImageName){
+                return $oldImageName;
+            }else {
+                // rename file to unique file name
+                $fileName = uniqid().'.'.$fileExt;
+    
+                // move file to directory
+                move_uploaded_file($fileTmp,'../../img/' . $fileName);
+
+                // delete old pic
+                unlink("../../img/".$oldImageName);
+
+                // return file name
+                return $fileName;
+            }
+        }
+    }
+}
+
+function editProfile($userId, $fullname, $email, $username, $image){
+     /* --------- Validate User Input ----------- */
+
+    // get global scope of database
+    global $conn;
+
+    $query = "SELECT * from users where user_id = '$userId'";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+    $oldEmail = $row["email"];
+    $oldUsername = $row["username"];
+    $oldImageName = $row["profile_image"];
+
+
+    // check full name
+    if(strlen($fullname) === 0){
+        return "<p>Please insert full name</p>";
+    }
+
+    // check email
+    if(!(filter_var($email, FILTER_VALIDATE_EMAIL))){
+        return "<p>Please insert valid email</p>";
+    }else{
+        $query = "SELECT email FROM users where email = '$email'";
+        $result = mysqli_query($conn, $query);
+        if(mysqli_affected_rows($conn) === 1){
+            $row = mysqli_fetch_assoc($result);
+            if($row["email"] !== $oldEmail){
+                return "<p>Email is already taken</p>";
+            }
+        }
+    }
+
+    // check username
+    if(strlen($username) === 0){
+        return "<p>Please insert username</p>";
+    }else {
+        $query = "SELECT username FROM users where username = '$username'";
+        $result = mysqli_query($conn, $query);
+        if(mysqli_affected_rows($conn) === 1){
+            $row = mysqli_fetch_assoc($result);
+            if($row["username"] !== $oldUsername){
+                return "<p>Email is already taken</p>";
+            }
+        }
+    }
+
+    // check image
+    $imageUpload = editImage($image, $oldImageName, $userId);
+    if($imageUpload === "not valid extension"){
+        return "<p>Image extension must be jpg/jpeg/png</p>";
+    }else if($imageUpload === "file's to big"){
+        return "<p>Image size must be under 1 MB</p>";
+    }
+    
+    
+    /* --------- Update User to Database----------- */
+    
+    // insert data
+    $query = "UPDATE users set fullname= '$fullname', email='$email', username='$username', profile_image='$imageUpload' WHERE user_id = '$userId'";
+    mysqli_query($conn, $query);
+    
+    // check error sql
+    if(mysqli_error($conn) > 0){
+        return "<p>Error cannot edit data into database</p> ".mysqli_error($conn);
+    }else {
+        return "updated";
+    }
+}
+
 function searchUser($inputValue, $userId){
     // get global scope of database
     global $conn;

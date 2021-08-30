@@ -7,7 +7,7 @@ var userIdTarget = 0;
 // get nav bar elements
 const nav = document.querySelector('nav.edit-profile');
 const editToggle = document.querySelector('.profile-edit-toggle i');
-const closeToggle = document.querySelector('.close-btn');
+const closeToggle = document.querySelector('.close-btn i');
 
 // add event for toggle
 editToggle.addEventListener('click', ()=>{
@@ -17,11 +17,6 @@ editToggle.addEventListener('click', ()=>{
 closeToggle.addEventListener('click', ()=>{
     nav.classList.remove('nav-appear');
 });
-
-
-
-
-
 
 
 /* ---------- Send text message ---------- */
@@ -250,4 +245,44 @@ setInterval(() => {
 
 }, 1000);
 
+
+
+/* ---------- Ajax Edit Profile ---------- */
+// get edit component
+
+const editBtn = document.querySelector(".edit-form .submit");
+
+function editProfile(editVal){
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST','script/ajax/ajax-edit-profile.php', true);
+    xhr.send(editVal);
+    xhr.onload = ()=>{
+        if(xhr.readyState === 4 && xhr.status === 200){
+            // get status from html
+            const editStat = document.querySelector(".edit-status");
+            
+            // add status value from ajax
+            editStat.innerHTML = xhr.responseText;
+
+            // add style if status is appear or redirect if succesfull(no status appear)
+            if(editStat.innerHTML.length > 0){
+                editStat.style.padding = "5px 0";
+            }else {
+                editStat.style.padding = "0";
+                document.location.href = 'chat.php';
+            }
+
+        }else{
+            console.log("Error Server Not Found or Busy");
+        }
+    }
+}
+
+
+editBtn.addEventListener('click',()=>{
+    const editForm = document.querySelector(".edit-form form");
+    const sentForm = new FormData(editForm);
+
+    editProfile(sentForm);
+});
 

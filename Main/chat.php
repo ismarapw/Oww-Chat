@@ -117,7 +117,6 @@ $getRowFriendList = getUserFriendList($currentUserId);
                                 </div>
                                 <div class="submit-btn">
                                     <button type="button" class="submit">Edit</button>
-                                    <button type="button" class="discard">Discard</button>
                                 </div>
                             </form>
                         </div>
@@ -127,6 +126,7 @@ $getRowFriendList = getUserFriendList($currentUserId);
         </aside>
         <main class="conversation"><p class="start-message">Select a chat to start messaging</p></main>
         <div class="message-status"></div>
+        <div class="edit-status"></div>
     </div>
     <script src="script/chat.js"></script>
 </body>

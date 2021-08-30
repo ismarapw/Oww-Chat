@@ -306,13 +306,8 @@ nav h1 {
 .submit{
     background-color: #323CEA;
     color: #f3f3f3;
-    width: 45%;
-}
-
-.discard {
-    background-color: #E6E6E6;
-    color: #444;
-    width: 45%;
+    width: 100%;
+    height: 40px;
 }
 
 .email-field, .username-field{
@@ -342,7 +337,7 @@ nav .profile-edit{
     color: #323CEA;
 }
 
-.submit:hover, .discard:hover{
+.submit:hover{
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
     transition: ease-in .25s;
       
@@ -396,8 +391,8 @@ main .friend-profile{
     color: #444;
 }
 
-.friend-image {
-    margin-left: 0.5rem;
+.ri-arrow-left-line {
+    margin-right: 0.5rem;
 }
 
 .option-toggle{
@@ -497,7 +492,7 @@ section.send-area {
 }
 
 /* status message */
-.message-status {
+.message-status, .edit-status {
     position: fixed;
     bottom: 0;
     left: 0;
