@@ -58,22 +58,26 @@ a {
 .body-container{
     display: flex;
     background-color: #f3f3f3;
+    
+    /* background-color: #444;/ */
 }
 
 /* Aside */
 aside.persons-chat {
     margin: auto;
     height: 100vh;
-    width: 100%;
+    width: 30%;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.25);
     position: relative;
     z-index: 2;
     overflow-x: hidden;  
+
 }
+
 
 /* Aside - Profile */
 header.profile {
-    background-color: #323CEA;
+    background: linear-gradient(180deg, #323CEA 34.38%, #1B55E9 100%, #1651E8 100%);
     padding: 1rem 2rem 2rem 2rem;
     height: 110px;
 }
@@ -207,12 +211,13 @@ section .friend-content {
 .friend-last-chat{
     align-self: center;
     margin-left: 10px;
+    width: 80%;
 }
 
 .last-message {
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 13rem;
+    width: 100%;
     display: inline-block;
     overflow: hidden;
 }
@@ -302,7 +307,7 @@ nav h1 {
     width: 90%;
 }
 
-.submit, .discard {
+.submit {
     font-weight: bold;
     border: 0;
     border-radius: 5px;
@@ -515,4 +520,17 @@ section.send-area {
     height: 100%;
     justify-content: center;
     align-items: center;
+}
+
+/* media query */
+@media screen and (max-width:1023px) {
+    aside.persons-chat {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    aside.persons-chat {
+        width: 100%;
+    }
 }

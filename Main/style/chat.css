@@ -41,6 +41,7 @@ a {
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 7px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
 }
 
 ::-webkit-scrollbar-track {
@@ -62,8 +63,11 @@ a {
 }
 /* main */
 main.conversation{
-    width: 100%;
+    margin: auto;
+    width: 30%;
     position: relative;
+    background-color: #fff;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.25);
 }
 
 /* Main - header */
@@ -152,7 +156,7 @@ section.conversation-area .container {
 }
 
 .sent {
-    background-color: #323CEA;
+    background: linear-gradient(180deg, #323CEA 34.38%, #1B55E9 100%, #1651E8 100%);
     align-self: flex-end;
 }
 
@@ -187,7 +191,7 @@ section.send-area {
 }
 
 .send-area input{
-    width: 90%;
+    width: 80%;
     height: 40px;
     border: 2px solid #B3B3B3;
     border-radius: 5px;
@@ -198,7 +202,7 @@ section.send-area {
 
 #submit-message {
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
-    background-color: #323CEA;
+    background: linear-gradient(180deg, #323CEA 34.38%, #1B55E9 100%, #1651E8 100%);
     border: none;
     border-radius: 5px;
     height: 40px;
@@ -223,19 +227,17 @@ section.send-area {
     z-index: 3;
 }
 
-.start-message{
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-/* media queries */
-@media screen and (max-width:768px) {
-    .send-area input{
-        width: 80%;
+/* media query */
+@media screen and (max-width:1023px) {
+    main.conversation {
+        width: 50%;
     }
 }
 
+@media screen and (max-width:768px) {
+    main.conversation {
+        width: 100%;
+    }
+}
 
 

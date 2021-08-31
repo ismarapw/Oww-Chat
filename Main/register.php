@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION["currentId"])){
-    header("Location:chat.php");
+    header("Location:list.php");
     exit;
 }
         

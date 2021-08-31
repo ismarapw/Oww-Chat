@@ -28,7 +28,7 @@ p, label, input, button, ::placeholder{
 /* Aside */
 aside {
     height: 100vh;
-    background-color: #323CEA;
+    background: linear-gradient(180deg, #323CEA 34.38%, #1B55E9 100%, #1651E8 100%);
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.25);
     padding: 1rem 2rem 1.5rem 3rem;
     width: 30%;
@@ -168,7 +168,7 @@ button:hover {
 /* Status validation */
 .status {
     position: fixed;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
     display: flex;
@@ -194,7 +194,8 @@ button:hover {
 @media screen and (max-width:1023px) {
     /* Global */
     body {
-        background-color: #323CEA;
+        background: linear-gradient(180deg, #323CEA 34.38%, #1B55E9 100%, #1651E8 100%);
+        min-height: 100vh;
     }
 
     .body-container{
@@ -206,7 +207,7 @@ button:hover {
         height: auto;
         padding: 1rem 1.5rem;
         width: 100%;
-        background-color: transparent;
+        background: transparent;
         box-shadow: none;
     }
     
@@ -261,6 +262,12 @@ button:hover {
 
     #username, #password, button{
         width: 100%;
+    }
+
+    /* status validate */
+    .status {
+        bottom: 0;
+        top: initial;
     }
 }
 

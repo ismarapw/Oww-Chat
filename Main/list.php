@@ -48,7 +48,7 @@ $getRowFriendList = getUserFriendList($currentUserId);
                         </div>
                     </div>
                     <div class="profile-edit-toggle">
-                        <i class="ri-edit-2-line"></i>
+                        <i class="ri-menu-line"></i>
                     </div>
                 </div>
             </header>
@@ -85,8 +85,8 @@ $getRowFriendList = getUserFriendList($currentUserId);
                 <div class="container">
                     <header>
                         <div class="title">
-                            <h1 class="main-title">Edit Profile</h1>
-                            <p class="desc-title">Change your profile details</p>
+                            <h1 class="main-title">Profile Details</h1>
+                            <p class="desc-title">You can make some changes</p>
                         </div>
                         <div class="close-btn">
                             <i class="ri-close-line"></i>
