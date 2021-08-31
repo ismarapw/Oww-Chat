@@ -57,21 +57,21 @@ a {
 /* Main Container */
 .body-container{
     display: flex;
-    background-color: #f3f3f3;
-    
+    /* background-color: #f3f3f3; */
+    background: linear-gradient(270deg, #2632FF -5.21%, #00A6CB 111.86%, #00C2FF 111.86%);
+    /* height: 100vh; */
     /* background-color: #444;/ */
 }
 
 /* Aside */
 aside.persons-chat {
     margin: auto;
-    height: 100vh;
+    height: 100%;
     width: 30%;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.25);
     position: relative;
     z-index: 2;
     overflow-x: hidden;  
-
 }
 
 

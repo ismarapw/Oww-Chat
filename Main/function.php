@@ -294,7 +294,7 @@ function getUserFriendList($userId){
     global $conn;
 
     // get list of friend
-    $query ="SELECT * FROM person_list, users where person_list.user1_id = $userId and person_list.user2_id = users.user_id OR person_list.user2_id = $userId and person_list.user1_id = users.user_id ORDER BY time DESC";
+    $query ="SELECT * FROM person_list, users where person_list.user1_id = $userId and person_list.user2_id = users.user_id OR person_list.user2_id = $userId and person_list.user1_id = users.user_id ORDER BY last_interaction DESC";
     $result = mysqli_query($conn, $query);
     if(mysqli_affected_rows($conn) > 0){
         $friendList = [];
@@ -337,6 +337,9 @@ function sendMessage($msgVal, $userId, $userDestinationId){
     if(mysqli_error($conn) > 0){
         return "<p>Error send message</p> ".mysqli_error($conn);
     }else {
+        // update last interaction time
+        $query = "UPDATE person_list set last_interaction= DEFAULT where user1_id = '$userId' and user2_id = '$userDestinationId' OR user1_id = '$userDestinationId' and user2_id = '$userId'";
+        mysqli_query($conn, $query);
         return "message sent";
     }
     
