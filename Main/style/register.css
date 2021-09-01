@@ -195,7 +195,7 @@ button.sign-up{
     border: 0;
     font-weight: bold;
     color: #F3F3F3;
-    background-color: #323CEA;
+    background: linear-gradient(180deg, #323CEA 34.38%, #1B55E9 100%, #1651E8 100%);
     cursor: pointer;
 }
 

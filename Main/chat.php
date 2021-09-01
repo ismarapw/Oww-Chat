@@ -60,9 +60,7 @@ $messageContent = getMessageContent($currentUserId, $targetId);
                         </div>
                     </div>
                     <div class='option-toggle'>
-                        <div class='three-dots'></div>
-                        <div class='three-dots'></div>
-                        <div class='three-dots'></div>
+                        <i class="ri-more-2-fill"></i>
                     </div>
                 </div>
             </header>

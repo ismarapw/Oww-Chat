@@ -59,18 +59,19 @@ a {
 /* Main Container */
 .body-container{
     display: flex;
-    /* background-color: #f3f3f3; */
-    background: linear-gradient(270deg, #2632FF -5.21%, #00A6CB 111.86%, #00C2FF 111.86%);
-    /* height: 100vh; */
+    background: linear-gradient(355.17deg, #2632FF -29.47%, #00A6CB 116.85%, #00C2FF 116.85%);
+    height: 100vh;
 }
 /* main */
 main.conversation{
     margin: auto;
-    height: 100%;
+    height: 95%;
+    overflow-y: hidden;
     width: 30%;
     position: relative;
     background-color: #fff;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
 }
 
 /* Main - header */
@@ -103,18 +104,11 @@ main .friend-profile{
 }
 
 .option-toggle{
-    margin-top: 15px;
+    align-self: center;
 }
 
-.option-toggle div{
-    width: 6px;
-    height: 6px;
-    background-color: #B2B2B2;
-    border-radius: 50%;
-}
-
-.option-toggle div:not(:nth-child(1)){
-    margin-top: 2px;
+.option-toggle i {
+    font-size: 22px;
 }
 
 .ri-arrow-left-line{
@@ -138,9 +132,9 @@ main .friend-profile{
 
 /* Main - conversation area */
 section.conversation-area{
-    padding: 1rem 1rem 6rem 1.25rem;
+    padding: 1rem 1rem 1rem 1.25rem;
     overflow-y: scroll;
-    height: calc(100vh - 90px);
+    height: 70%;
 }
 
 section.conversation-area .container {
@@ -205,7 +199,7 @@ section.send-area {
 
 #submit-message {
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
-    background: #323CEA;
+    background: linear-gradient(180deg, #323CEA 34.38%, #1B55E9 100%, #1651E8 100%);
     border: none;
     border-radius: 5px;
     height: 40px;
@@ -240,6 +234,8 @@ section.send-area {
 @media screen and (max-width:768px) {
     main.conversation {
         width: 100%;
+        height: 100%;
+        border-radius: 0;
     }
 }
 

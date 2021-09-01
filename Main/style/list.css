@@ -40,6 +40,7 @@ a {
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 7px;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -54,30 +55,32 @@ a {
     background: #555;
 }
 
+
+
 /* Main Container */
 .body-container{
     display: flex;
-    /* background-color: #f3f3f3; */
-    background: linear-gradient(270deg, #2632FF -5.21%, #00A6CB 111.86%, #00C2FF 111.86%);
-    /* height: 100vh; */
-    /* background-color: #444;/ */
+    background: linear-gradient(355.17deg, #2632FF -29.47%, #00A6CB 116.85%, #00C2FF 116.85%);
+    height: 100vh;
 }
 
 /* Aside */
 aside.persons-chat {
     margin: auto;
-    height: 100%;
+    height: 95%;
+    border-radius: 10px;
     width: 30%;
-    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
     position: relative;
     z-index: 2;
     overflow-x: hidden;  
+    overflow-y: hidden;
 }
 
 
 /* Aside - Profile */
 header.profile {
-    background: linear-gradient(180deg, #323CEA 34.38%, #1B55E9 100%, #1651E8 100%);
+    background: linear-gradient(355.17deg, #2632FF -29.47%, #00A6CB 116.85%, #00C2FF 116.85%);
     padding: 1rem 2rem 2rem 2rem;
     height: 110px;
 }
@@ -202,6 +205,10 @@ section.friends{
     overflow-y: scroll;
 }
 
+section.friends .container {
+    padding: 0 0 4rem 0;
+}
+
 section .friend-content {
     display: flex;
     cursor: pointer;    
@@ -239,7 +246,7 @@ section .friend-content {
 nav.edit-profile{
     position: absolute;
     background-color: #fff;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     top: 0;
     left: 0;
@@ -259,7 +266,7 @@ nav header{
 }
 
 nav h1 {
-    font-size: 24px;
+    font-size: 20px;
     color: #444;
     font-weight: bold;
 }
@@ -277,8 +284,8 @@ nav h1 {
 }
 
 .user-image img {
-    width: 96px;
-    height: 96px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
 }
 
@@ -315,7 +322,7 @@ nav h1 {
 }
 
 .submit{
-    background-color: #323CEA;
+    background: linear-gradient(180deg, #323CEA 34.38%, #1B55E9 100%, #1651E8 100%);
     color: #f3f3f3;
     width: 100%;
     height: 40px;
@@ -371,156 +378,6 @@ nav .profile-edit{
     cursor: pointer;
 }
 
-/* main */
-main.conversation{
-    width: 70%;
-    position: relative;
-}
-
-/* Main - header */
-main .friend-profile{
-    background-color: #fafafa;
-    padding: 1rem 2rem 0 1.25rem;
-    height: 90px;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
-}
-
-.friend-profile .container, .friend-profile .friend-content{
-    display: flex;
-}
-
-.friend-profile .container{
-    justify-content: space-between;
-}
-
-.friend-info{
-    align-self: center;
-    margin-left: 10px;
-}
-
-.friend-info .name, .friend-info .indicator-desc {
-    color: #444;
-}
-
-.ri-arrow-left-line {
-    margin-right: 0.5rem;
-}
-
-.option-toggle{
-    margin-top: 15px;
-}
-
-.option-toggle div{
-    width: 6px;
-    height: 6px;
-    background-color: #B2B2B2;
-    border-radius: 50%;
-}
-
-.option-toggle div:not(:nth-child(1)){
-    margin-top: 2px;
-}
-
-.ri-arrow-left-line{
-    align-self: center;
-    font-size: 1.2rem;
-}
-
-/* Main - conversation area */
-section.conversation-area{
-    padding: 1rem 1rem 6rem 1.25rem;
-    overflow-y: scroll;
-    height: calc(100vh - 90px);
-}
-
-section.conversation-area .container {
-    display: flex;
-    flex-direction: column;
-}
-
-.sent, .reply {
-    color: #f3f3f3;
-    padding: .75rem 1rem;
-    max-width: 80%;
-}
-
-.message {
-    line-height: 20px;
-}
-
-.sent {
-    background-color: #323CEA;
-    align-self: flex-end;
-}
-
-.reply{
-    background-color: #444;
-    align-self: flex-start;
-}
-
-.conversation-area .container div {
-    min-height: 40px;
-    border-radius: 5px;
-}
-
-.conversation-area .container div:not(:nth-child(1)) {
-    margin-top: 20px;
-}
-
-/* Main - Send Box Area */
-section.send-area {
-    background-color: #fafafa;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 1rem;
-    box-shadow: 2px -3px 5px rgba(0, 0, 0, 0.25);
-}
-
-.send-area input{
-    width: 90%;
-    height: 40px;
-    border: 2px solid #B3B3B3;
-    border-radius: 5px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
-    outline: 0;
-    padding-left: 10px;
-}
-
-#submit-message {
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
-    background-color: #323CEA;
-    border: none;
-    border-radius: 5px;
-    height: 40px;
-    width: 50px;
-    margin-left: 10px;
-    cursor: pointer;
-}
-
-#submit-message i {
-    color: #fff;
-}
-
-/* status message */
-.message-status, .edit-status {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #F3F3F3;
-    z-index: 3;
-}
-
-.start-message{
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-}
 
 /* media query */
 @media screen and (max-width:1023px) {
@@ -532,5 +389,7 @@ section.send-area {
 @media screen and (max-width:768px) {
     aside.persons-chat {
         width: 100%;
+        height: 100%;
+        border-radius: 0;
     }
 }
