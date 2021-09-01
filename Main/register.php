@@ -51,7 +51,7 @@ if(isset($_SESSION["currentId"])){
                                 <img src="img/user-default.svg" alt="user-default">
                                 <label for="profile-image" class="upload-img">Choose a file</label>
                             </div>
-                            <input type="file" name="profile-image" id="profile-image" placeholder="profile-image" style="display:none;">
+                            <input type="file" name="profile-image" id="profile-image" placeholder="profile-image" style="display:none;" accept="image/*">
                         </div>
                         <div class="fullname-field">
                             <label for="fullname" class="label-fullname">Fullname</label>

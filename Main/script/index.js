@@ -19,7 +19,11 @@ function submitForm(form){
 
             // add style if status is appear or redirect if succesfull(no status appear)
             if(status.innerHTML.length > 0){
+                status.style.display = "flex";
                 status.style.padding = "5px 0";
+                setTimeout(() => {
+                    status.style.display = "none";
+                }, 3000);
             }else {
                 status.style.padding = "0";
                 document.location.href = 'list.php';

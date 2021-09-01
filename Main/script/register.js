@@ -19,7 +19,11 @@ function submitForm(form){
 
             // add style if status is appear or redirect if succesfull(no status appear)
             if(status.innerHTML.length > 0){
+                status.style.display = "flex";
                 status.style.padding = "5px 0";
+                setTimeout(() => {
+                    status.style.display = "none";
+                }, 3000);
             }else {
                 status.style.padding = "0";
                 document.location.href = 'list.php';
@@ -34,4 +38,19 @@ function submitForm(form){
 submitBtn.addEventListener('click', ()=>{
     let formToBeSubmit = new FormData(formInputs);
     submitForm(formToBeSubmit);
+});
+
+
+/* ---------- Live preview image edit ---------- */
+const inputFile = document.querySelector("#profile-image");
+inputFile.addEventListener('change', ()=>{
+    let file = inputFile.files;
+    if(file.length > 0){
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(file[0]);
+        fileReader.onload = (e)=>{
+            console.log(e);
+            document.querySelector(".register-form img").setAttribute("src", e.target.result);
+        }
+    }
 });

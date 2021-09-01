@@ -100,7 +100,7 @@ $getRowFriendList = getUserFriendList($currentUserId);
                                         <img src="img/<?php echo $getRow["profile_image"]; ?>" alt="user-profile">
                                         <label for="image-input" class="upload-image">Choose a file</label>
                                     </div>
-                                    <input type="file" name="image-input" id="image-input" style="display: none;">
+                                    <input type="file" name="image-input" id="image-input" style="display: none;" accept="image/*">
                                 </div>
                                 <div class="fullname-field">
                                     <label for="fullname" class="label-fullname">Fullname</label>

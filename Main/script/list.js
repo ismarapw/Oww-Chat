@@ -112,7 +112,11 @@ function editProfile(editVal){
 
             // add style if status is appear or redirect if succesfull(no status appear)
             if(editStat.innerHTML.length > 0){
+                editStat.style.display = "flex";
                 editStat.style.padding = "5px 0";
+                setTimeout(() => {
+                    editStat.style.display = "none";
+                }, 3000);
             }else {
                 editStat.style.padding = "0";
                 document.location.href = 'list.php';
@@ -132,3 +136,18 @@ editBtn.addEventListener('click',()=>{
     editProfile(sentForm);
 });
 
+
+
+/* ---------- Live preview image edit ---------- */
+const inputFile = document.querySelector("#image-input");
+inputFile.addEventListener('change', ()=>{
+    let file = inputFile.files;
+    if(file.length > 0){
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(file[0]);
+        fileReader.onload = (e)=>{
+            console.log(e);
+            document.querySelector(".edit-form img").setAttribute("src", e.target.result);
+        }
+    }
+});
