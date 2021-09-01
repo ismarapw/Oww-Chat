@@ -14,5 +14,6 @@ Oww Chat (nama belum fix) intinya adalah project aplikasi web chatingan real-tim
 3. lightbox foto profil
 
 # Disclaimer
-Project ini hanya untuk latihan semata dengan menggunakan html5, vanila css, vanila js dan php. 
+1. Mungkin masih ada bug. 
+2. Project ini hanya untuk latihan semata dengan menggunakan html5, vanila css, vanila js dan php. 
 
