@@ -134,15 +134,14 @@ function login($username, $password){
     }
 }
 
-function editImage($file,$oldFile, $userId){
-    global $conn;
+function editImage($file,$oldFile){
 
     // get file info
     $fileName = $file["name"];
     $fileSize = $file["size"];
     $fileTmp = $file["tmp_name"];
 
-
+    // check upload image or not
     if($fileName === ""){
         return $oldFile;
     }
@@ -160,26 +159,17 @@ function editImage($file,$oldFile, $userId){
         if($fileSize > 1000000){
             return "file's to big";
         }else {
-            // check old file name
-            $query = "SELECT profile_image from users where user_id = '$userId'";
-            $result = mysqli_query($conn, $query);
-            $row = mysqli_fetch_assoc($result);
-            $oldImageName = $row["profile_image"];
-            if($fileName === $oldImageName){
-                return $oldImageName;
-            }else {
-                // rename file to unique file name
-                $fileName = uniqid().'.'.$fileExt;
-    
-                // move file to directory
-                move_uploaded_file($fileTmp,'../../img/' . $fileName);
+            // rename file to unique file name
+            $fileName = uniqid().'.'.$fileExt;
 
-                // delete old pic
-                unlink("../../img/".$oldImageName);
+            // move file to directory
+            move_uploaded_file($fileTmp,'../../img/' . $fileName);
 
-                // return file name
-                return $fileName;
-            }
+            // delete old pic
+            unlink("../../img/".$oldFile);
+
+            // return file name
+            return $fileName;
         }
     }
 }
