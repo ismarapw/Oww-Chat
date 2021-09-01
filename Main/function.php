@@ -216,7 +216,7 @@ function editProfile($userId, $fullname, $email, $username, $image){
         if(mysqli_affected_rows($conn) === 1){
             $row = mysqli_fetch_assoc($result);
             if($row["username"] !== $oldUsername){
-                return "<p>Email is already taken</p>";
+                return "<p>Username is already taken</p>";
             }
         }
     }
