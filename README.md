@@ -1,5 +1,5 @@
 # Oww Chat
-Oww Chat (nama belum fix) intinya adalah project aplikasi web chatingan real-time (1000ms). Kenapa 1000ms, karena updatenya masih pake fungsi interval di java script, belum pake semacam soket atau RTC. Jadi aplikasi ini sebenrnya query messagenya tiap 1 detik kemudian ditampilin ke client. 
+Oww Chat (nama belum fix) intinya adalah project aplikasi web chatingan real-time (1000ms). Kenapa 1000ms, karena updatenya masih pake fungsi interval di javascript, belum pake semacam soket atau RTC. Jadi aplikasi ini sebenrnya query messagenya tiap 1 detik kemudian ditampilin ke client. 
 
 # Fitur
 1. chatingan
